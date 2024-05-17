@@ -49,15 +49,47 @@ def exercise_2(n):
 
 def exercise_3(n):
     
+    find_next_bigger(find_bigger_primery(n))
+
+def find_next_bigger(n):
+    n_list = []
+    number_found=False
+    while number_found==False:
+        number_found=True
+        n = n + 1
+        n_list = number_to_list(n)
+        for i in range(len(n_list)-1):
+            if(n_list[i]<n_list[i+1]):
+                number_found=True
+            else:
+                number_found=False
+                break             
+    
+    print("The first number with digits in ascending order as a List is: " + str(n_list))
+    return n_list   
+
+
+
+    
+def number_to_list(n):
+
+    lst =[]
+    while n!=0:
+        lst.insert(0, int(n%10))
+        n=(n - n%10)/10
+    return lst
+
+def find_bigger_primery(n):
+    original_n=n
     primery_number = False
     while primery_number==False:
         n=n+1
         for i_fund in range(n):
-            print("i_fund:"+ str(i_fund+2) )
+            # print("i_fund:"+ str(i_fund+2) )
 
             for i_chng in range(n):
-                print("i_chng:"+str(i_chng+2))
-                print("*:"+ str((i_fund+2)*(i_chng+2)))
+                # print("i_chng:"+str(i_chng+2))
+                # print("*:"+ str((i_fund+2)*(i_chng+2)))
 
                 if((i_fund+2)*(i_chng+2) == n):
                     n=n+1
@@ -66,12 +98,10 @@ def exercise_3(n):
                 if((i_fund+2)*(i_chng+2) > n):
                     break
         primery_number=True
-        print(primery_number)
-            
+        # print(primery_number)
 
-
-    print(n)
-
+    print("The first prime number greater than "+ str(original_n) + " is: "+ str(n))
+    return int(n)
 
 def exercise_4(triangle_sides_lst):
     
