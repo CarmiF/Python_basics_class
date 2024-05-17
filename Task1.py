@@ -16,7 +16,6 @@ def arrange_int_list_from_big_to_small(lst):
     print(arranged_lst)
     return arranged_lst
     
-    
 def exercise_1():
     month_with_31_days=(1,3,5,7,8,10,12)
     month_with_30_days=(4,6,9,11)
@@ -26,7 +25,7 @@ def exercise_1():
     year = int(input("Enter a year:"))
     if(month in month_with_31_days):
         if(day>0 and day<32):
-            print("Valid date.")
+            print("The date is valid.")
             return
     if(month in month_with_31_days):
         if(day>0 and day<31):
@@ -48,7 +47,6 @@ def exercise_2(n):
         print(line_to_print)
 
 def exercise_3(n):
-    
     find_next_bigger(find_bigger_primery(n))
 
 def find_next_bigger(n):
@@ -68,9 +66,6 @@ def find_next_bigger(n):
     print("The first number with digits in ascending order as a List is: " + str(n_list))
     return n_list   
 
-
-
-    
 def number_to_list(n):
 
     lst =[]
@@ -85,12 +80,7 @@ def find_bigger_primery(n):
     while primery_number==False:
         n=n+1
         for i_fund in range(n):
-            # print("i_fund:"+ str(i_fund+2) )
-
             for i_chng in range(n):
-                # print("i_chng:"+str(i_chng+2))
-                # print("*:"+ str((i_fund+2)*(i_chng+2)))
-
                 if((i_fund+2)*(i_chng+2) == n):
                     n=n+1
                     i_fund=0
@@ -98,7 +88,6 @@ def find_bigger_primery(n):
                 if((i_fund+2)*(i_chng+2) > n):
                     break
         primery_number=True
-        # print(primery_number)
 
     print("The first prime number greater than "+ str(original_n) + " is: "+ str(n))
     return int(n)
@@ -163,31 +152,22 @@ elif question == 2:
         if(i==2):
             print("3 mistakes, Bye Bye!")
     
-
-
 elif question == 3:
-    while True:
-        n = int(input("Enter an integer: "))
-        exercise_3(n)
-
-    
-
+    n = int(input("Enter an integer: "))
+    exercise_3(n)
 
 elif question == 4:
-    while True:
-        triangle_sides_lst = []
-        triangle_sides_str = str(input("Enter 3 numbers:"))
-        list_cell = 0
-        number_collector = ""
-        for item in triangle_sides_str:
-            if item==" " and number_collector!="":
-                # list_cell=list_cell+1
-                triangle_sides_lst.append(int(number_collector))
-                number_collector = ""
-            else:
-                number_collector=number_collector + item
-                # triangle_sides_lst[list_cell]=triangle_sides_lst[list_cell]+item
-        if number_collector!="": triangle_sides_lst.append(int(number_collector))
-        triangle_sides_lst = arrange_int_list_from_big_to_small(triangle_sides_lst)
-        exercise_4(triangle_sides_lst)
+    triangle_sides_lst = []
+    triangle_sides_str = str(input("Enter 3 numbers:"))
+    list_cell = 0
+    number_collector = ""
+    for item in triangle_sides_str:
+        if item==" " and number_collector!="":
+            triangle_sides_lst.append(int(number_collector))
+            number_collector = ""
+        else:
+            number_collector=number_collector + item
+    if number_collector!="": triangle_sides_lst.append(int(number_collector))
+    triangle_sides_lst = arrange_int_list_from_big_to_small(triangle_sides_lst)
+    exercise_4(triangle_sides_lst)
 
