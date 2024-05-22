@@ -1,14 +1,14 @@
 # Functions
 
-#Function getting a list of int veraibles and arrange it from big to small [biggest int,..., smallest int] 
+#Function getting a list of int variables and arrange it from big to small [biggest int,..., smallest int] 
 def arrange_int_list_from_big_to_small(lst):
-    # difine the finale list to return
+    # Define the final list to return
     arranged_lst = []
-    # Preapring list with "0" in ecah cell, they will be replaced in the original list's ints
+    # Preparing list with "0" in each cell, they will be replaced in the original list's ints
     for i in lst:
         arranged_lst.append(0)
 
-    # rank_counter- Counte how many numers are bigger in the list from the current checked number 
+    # rank_counter- Count how many numbers are bigger in the list from the current checked number 
     rank_counter=0
     # item_fund- an indexed int in the original list
     for item_fund in lst:
@@ -16,7 +16,7 @@ def arrange_int_list_from_big_to_small(lst):
         for item_chng in lst:
             if item_fund< item_chng: 
                 rank_counter = rank_counter + 1
-        # the folloing while loop is checkining either there are doplicates numbers in the original list and if so, locate the item _fund that ranked in the next free cell 
+        # The following while loop checking either there are duplicates numbers in the original list and if so, locate the item _fund that ranked in the next free cell 
         while arranged_lst[rank_counter] != 0:
             rank_counter = rank_counter + 1
         arranged_lst[rank_counter] = item_fund
@@ -24,16 +24,16 @@ def arrange_int_list_from_big_to_small(lst):
     return arranged_lst
     
 def exercise_1():
-    # preapering tuples for monthes we already knows how many days exists in
+    # Preparing tuples for months we already knows how many days exists in
     month_with_31_days=(1,3,5,7,8,10,12)
     month_with_30_days=(4,6,9,11)
-    # boll for the final answer
+    # Boll for the final answer
     valid_date = True
-    # asking fir the input
+    # Asking fir the input
     day = int(input("Enter a day:"))
     month = int(input("Enter a month:")) 
     year = int(input("Enter a year:"))
-    # chock which category the input in.
+    # Chock which category the input in.
     if(month in month_with_31_days):
         if(day>0 and day<32):
             print("The date is valid.")
@@ -43,7 +43,7 @@ def exercise_1():
             print("The date is valid.")
             return
     if(month == 2):
-        # this if is intended to check rather the year is a leap year
+        # This if is intended to check rather the year is a leap year
         if((year % 400 == 0) or (year % 4 == 0 and year % 100 != 0) and day>0 and day<30):
             print("The date is valid.")
             return
@@ -54,35 +54,35 @@ def exercise_1():
     print("Invalid date.")
 
 def exercise_2(n):
-    # loop for printing each line
+    # Loop for printing each line
     for line in range(n):
         line_to_print = ""
-        # loop for printing spaces
+        # Loop for printing spaces
         for space in range(n-line-1):
             line_to_print = line_to_print + " "
-        #  loop for printing "*"
+        #  Loop for printing "*"
         for stars in range(line+1):
             line_to_print = line_to_print + "* "
         print(line_to_print)
 
 def exercise_3(n):
-    # commentes in the functions
-    find_next_bigger(find_bigger_primery(n))
+    # Comments in the functions
+    find_next_bigger(find_bigger_primary(n))
 
-# function takning an "int" and return the next bigger number which every number in it is bigger than the number as his left, as a list
+# Function taking an "int" and return the next bigger number which every number in it is bigger than the number as his left, as a list
 def find_next_bigger(n):
-    # final list to return
+    # Final list to return
     n_list = []
-    # bool, whemn true the number has found
+    # Bool, when true the number has found
     number_found=False
-    #  loop loking for that number
+    #  Loop looking for that number
     while number_found==False:
         number_found=True
-        # adding 1 to the given number. Also increasing the number after it has been chacked.
+        # Adding 1 to the given number. Also increasing the number after it has been checked.
         n = n + 1
-        # Conveting n to list, so it will be easier to work with 
+        # Converting n to list, so it will be easier to work with 
         n_list = number_to_list(n)
-        # loop checking if eveary number in n_list follows the rule. if not, number_found will became False. 
+        # Loop checking if every number in n_list follows the rule. if not, number_found will became False. 
         for i in range(len(n_list)-1):
             if(n_list[i]<n_list[i+1]):
                 number_found=True
@@ -93,47 +93,62 @@ def find_next_bigger(n):
     print("The first number with digits in ascending order as a List is: " + str(n_list))
     return n_list   
 
-# Getting int return list in each cell one of the int's numbers. Exemple: input: 1023 output: [1,0,2,3]
+# Getting int return list in each cell one of the int's numbers. Example: input: 1023 output: [1,0,2,3]
 def number_to_list(n):
 
     lst =[]
     while n!=0:
         lst.insert(0, int(n%10)) #% the input in to get the digit unit 
-        n=(n - n%10)/10 # Subtract the digit unit and divide 10 to create new number witout the number already added to the list
+        n=(n - n%10)/10 # Subtract the digit unit and divide 10 to create new number without the number already added to the list
     return lst
 
-def find_bigger_primery(n):
-    original_n=n # Veraible keeping the original n
-    primery_number = False # Veraible indicates if the primery numeber has found
-    while primery_number==False: 
-        n=n+1 # Increse the input number in 1 as the requirments in the  mission
-        # loop checking every number until n to find if there are two dividers differnt from 1 and n
-        for i_fund in range(n): # first loop optional divider number one 
-            for i_chng in range(n): # second loop optional divider number two 
-                if((i_fund+2)*(i_chng+2) == n): # check if i_fund * i_chng equal n. start from 2 because 1 not count as a divider in the qustion 
-                    n=n+1 # If dividers has been found move to the next number
-                    i_fund=0. 
-                    break
-                if((i_fund+2)*(i_chng+2) > n): # If the * bigger than n, no need continue checking. 
-                    break
-        primery_number=True
+def find_bigger_primary(n):
+    original_n=n # Variable keeping the original n
+    #  The following code will check two numbers to be n dividers. i_fund and i_chng. It will check every available option until a divider will be found.
+    i_fund = 2 # Start from 2 because 1 will divide every number
+    n_is_prime = False
+    divider_for_n_found = False
+    n=n+1
+    while n_is_prime == False: 
+        i_chng = 1
+        
+        while i_chng*i_fund <= n and divider_for_n_found == False: 
+            i_chng = i_chng + 1
+        
+            if i_chng*i_fund == n:
+                divider_for_n_found = True
+                n_is_prime = False
+                n = n+1
+                i_fund = 2
+        
+        i_fund = i_fund + 1
 
+        if i_fund >= n:
+            n_is_prime =True
+        
+        divider_for_n_found = False
+    
     print("The first prime number greater than "+ str(original_n) + " is: "+ str(n))
     return int(n)
 
+
+
+
+
+
 def exercise_4(triangle_sides_lst):
-    # Put the sizes in veraibels
+    # Put the sizes in variables
     big_side= triangle_sides_lst[0] 
     medium_side= triangle_sides_lst[1]
     small_side= triangle_sides_lst[2]
     
-    # The folloing "if" conditions mention to check if the input matches the reqaierments
+    # The following "if" conditions mention to check if the input matches the requirements
     # Check if there are 3 only sides in the input
     if len(triangle_sides_lst)!=3:
         print("Illegal triangle")
         return
     
-    # Check if the input sizes are resonable in triangle
+    # Check if the input sizes are reasonable in triangle
     if medium_side+small_side<=big_side:
         print("Illegal triangle")
         return
@@ -179,7 +194,7 @@ question = int(input("Enter your choice (1-4): "))
 if question == 1:
         exercise_1() 
 elif question == 2:
-    # Loop asking for inputs, if the input meets the requrmenments, prints the "*" else asking for more inputes until 3.
+    # Loop asking for inputs, if the input meets the requirements, prints the "*" else asking for more inputs until 3.
     for i in range(3):
         n = int(input("Input number of rows (between 1 and 10): "))
         if(n<11 and n >0): # Check if the input between 1 to 10 
@@ -196,9 +211,9 @@ elif question == 4:
     triangle_sides_lst = []
     triangle_sides_str = str(input("Enter 3 numbers:"))
     list_cell = 0
-    number_collector = "" # Varaibels collects the chars between spacses
+    number_collector = "" # Variables collects the chars between spaces
     for item in triangle_sides_str: # Loop dividing the input by spaces " " and create list of ints out of it. Example: input: 1 2 3 output [1,2,3]
-        if item==" " and number_collector!="": # If the item in the input at the current index equls " " append the nuber collected from the input
+        if item==" " and number_collector!="": # If the item in the input at the current index equals " " append the number collected from the input
             triangle_sides_lst.append(int(number_collector))
             number_collector = ""
         else:
