@@ -145,40 +145,31 @@ def exercise_4(triangle_sides_lst):
     # The following "if" conditions mention to check if the input matches the requirements
     # Check if there are 3 only sides in the input
     if len(triangle_sides_lst)!=3:
-        print("Illegal triangle")
-        return
+        return"Illegal triangle"
     
     # Check if the input sizes are reasonable in triangle
     if medium_side+small_side<=big_side:
-        print("Illegal triangle")
-        return
+        return "Illegal triangle"
     
     
     if ( big_side == medium_side == small_side):
-        print("Equilateral","Acute")
-        return ("Equilateral","Acute")
+        return ('Equilateral','Acute')
     
     if (big_side * big_side == small_side * small_side + medium_side * medium_side):
         if(big_side==medium_side or medium_side == small_side):
-            print("Isosceles","Right")
             return("Isosceles","Right")
         else:
-            print("Scalene","Right")
             return("Scalene","Right")
     
     if(medium_side == small_side):
-        print("Isosceles","Obtuse")
         return("Isosceles","Obtuse")
 
     if(big_side==medium_side):
-        print("Isosceles","Acute")
         return ("Isosceles","Acute")
     
     if(big_side/2<(medium_side+small_side)):
-        print("Scalene","Obtuse")
         return ("Scalene","Obtuse")
     else:
-        print ("Scalene","Obtuse")
         return ("Scalene","Obtuse")
 
 
@@ -221,5 +212,6 @@ elif question == 4:
     if number_collector!="": # Adding the last number to the list
         triangle_sides_lst.append(int(number_collector))
     triangle_sides_lst = arrange_int_list_from_big_to_small(triangle_sides_lst) #arrange the list from big  value to small value. 
-    exercise_4(triangle_sides_lst)
+    output = exercise_4(triangle_sides_lst)
+    print(output)
 
