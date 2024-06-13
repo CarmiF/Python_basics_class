@@ -1,6 +1,6 @@
 # Functions
 
-#Function getting a list of int variables and arrange it from big to small [biggest int,..., smallest int] 
+#Function getting a list of ints and arrange it from big to small [biggest int,..., smallest int] 
 def arrange_int_list_from_big_to_small(lst):
     # Define the final list to return
     arranged_lst = []
@@ -29,11 +29,11 @@ def exercise_1():
     month_with_30_days=(4,6,9,11)
     # Boll for the final answer
     valid_date = True
-    # Asking fir the input
+    # Asking for the input
     day = int(input("Enter a day:"))
     month = int(input("Enter a month:")) 
     year = int(input("Enter a year:"))
-    # Chock which category the input in.
+    # Chose which category the month input in.
     if(month in month_with_31_days):
         if(day>0 and day<32):
             print("The date is valid.")
@@ -43,7 +43,7 @@ def exercise_1():
             print("The date is valid.")
             return
     if(month == 2):
-        # This if is intended to check rather the year is a leap year
+        # This if intended to check rather the year is a leap year
         if((year % 400 == 0) or (year % 4 == 0 and year % 100 != 0) and day>0 and day<30):
             print("The date is valid.")
             return
@@ -67,20 +67,24 @@ def exercise_2(n):
 
 def exercise_3(n):
     # Comments in the functions
-    find_next_bigger(find_bigger_primary(n))
+    original_n = n
+    bigger_primary = find_bigger_primary(n)
+    print("The first prime number greater than "+ str(original_n) + " is: "+ str(bigger_primary))
+    next_bigger = find_next_bigger(bigger_primary)
+    return next_bigger
 
-# Function taking an "int" and return the next bigger number which every number in it is bigger than the number as his left, as a list
+# Function taking an "int" and return the next number which every digit in it is bigger than the number as his left- as a list
 def find_next_bigger(n):
     # Final list to return
     n_list = []
-    # Bool, when true the number has found
+    # Bool, when true the number has been found
     number_found=False
     #  Loop looking for that number
     while number_found==False:
         number_found=True
         # Adding 1 to the given number. Also increasing the number after it has been checked.
         n = n + 1
-        # Converting n to list, so it will be easier to work with 
+        # Converting n to list, easier to work with it
         n_list = number_to_list(n)
         # Loop checking if every number in n_list follows the rule. if not, number_found will became False. 
         for i in range(len(n_list)-1):
@@ -90,7 +94,7 @@ def find_next_bigger(n):
                 number_found=False
                 break             
     
-    print("The first number with digits in ascending order as a List is: " + str(n_list))
+    # print("The first number with digits in ascending order as a List is: " + str(n_list))
     return n_list   
 
 # Getting int return list in each cell one of the int's numbers. Example: input: 1023 output: [1,0,2,3]
@@ -128,7 +132,7 @@ def find_bigger_primary(n):
         
         divider_for_n_found = False
     
-    print("The first prime number greater than "+ str(original_n) + " is: "+ str(n))
+    # print("The first prime number greater than "+ str(original_n) + " is: "+ str(n))
     return int(n)
 
 
@@ -196,7 +200,12 @@ elif question == 2:
     
 elif question == 3:
     n = int(input("Enter an integer: "))
-    exercise_3(n)
+    original_n = n
+    next_bigger = exercise_3(n)
+    
+    print("The first number with digits in ascending order as a List is: " + str(next_bigger))
+
+
 
 elif question == 4:
     triangle_sides_lst = []
