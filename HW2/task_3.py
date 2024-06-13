@@ -1,6 +1,4 @@
 # q1.a
-
-
 def linear_sum(x, result):
     if x == []:
         return False
@@ -14,7 +12,6 @@ def linear_sum(x, result):
         no_x0 = linear_sum(x[1:], result)
     return no_x0
 
-
 # q1.b
 def return_sliced_str(str, char):
     if char in str:
@@ -24,7 +21,6 @@ def return_sliced_str(str, char):
             return return_sliced_str(str[1:],char)
     else:
         return False
-
 def ordered_subset(str1,str2):
     if str2== "":
         return True
@@ -36,7 +32,6 @@ def ordered_subset(str1,str2):
     return False
 
 # q2.a
-
 def find_max_from_list(lst):
     if len(lst)!= 1:
         if(lst[0]<=lst[1]):
@@ -45,10 +40,7 @@ def find_max_from_list(lst):
             lst = [lst[0]] + lst[2:]
             lst = find_max_from_list(lst)
     return lst
-    
-
-# print(find_max_from_list([3,2,10,4,5,6]))
-
+    # print(find_max_from_list([3,2,10,4,5,6]))
 def solve_test(questions, total_time):
     grade_with = 0
     grade_keeper = 0
@@ -67,17 +59,13 @@ def solve_test(questions, total_time):
         return grade_with
     else:
         return no_x0 
-    
-
 
 # q2.b
-
 def floor_half(num):
     if num - int(num) == 0.5:
         return num-0.5
     else:
         return num
-
 def solve_test_with_factor_helper(questions, total_time, index_to_change, grade_old):
     
     if len(questions) == index_to_change:
@@ -90,23 +78,64 @@ def solve_test_with_factor_helper(questions, total_time, index_to_change, grade_
     if grade_new > grade_old:
         grade_old = grade_new    
     return solve_test_with_factor_helper(questions, total_time, index_to_change+1, grade_old)
-    
-
-
 def solve_test_with_factor(questions, total_time):
-    return solve_test_with_factor_helper(questions, total_time, 0, 0)
-    
+    return solve_test_with_factor_helper(questions, total_time, 0, 0)  
 # print(solve_test_with_factor([[20,5], [40,9] ,[35,8] ,[35,7]], 55))
 
 # q3.a
+def directory_depth_helper(dir):
+    dir_max_deep = 0
+    if not isinstance(dir, dict):
+        return(0)
+
+    for key in dir.keys():
+        key_dir_deep = directory_depth_helper(dir.get(key))+1
+        if dir_max_deep < key_dir_deep:
+            dir_max_deep = key_dir_deep
+        key_dir_deep = 0
+    
+    return dir_max_deep
+
 def directory_depth(dir):
-    # Delete the pass command and insert you code below
-    pass
+    if not isinstance(dir, dict):
+        return("dir is not a dict")
+    
+    return (directory_depth_helper(dir)-1)
+    
+
+
+# print(directory_depth({"a": 1, "b":2}))
+# print(directory_depth({"c": {"a":1, "b":2}}))
+# print(directory_depth({"c": {"a": 1, "b": 2}, "d": {"c": {"a": 1, "b": 2}, "b": 2}}))
+# print(directory_depth({"a": {"a":1, "b":2}, "b":2}))
+# print(directory_depth(3))
 
 # q3.b
 def directory_music_size(dir,is_music=False):
-    # Delete the pass command and insert you code below
-    pass
+    total_folder_size = 0
+    if not isinstance(dir, dict):
+        if  is_music==True:
+            return dir
+        else:
+            return 0
+        
+    if is_music == True:
+        for key in dir.keys():
+            total_folder_size = directory_music_size(dir.get(key),True) + total_folder_size
+    else:
+        for key in dir.keys():
+            if "music" in key:
+                total_folder_size = directory_music_size(dir.get(key),True) + total_folder_size
+            else:
+                total_folder_size = directory_music_size(dir.get(key),False) + total_folder_size
+    
+    return total_folder_size
+
+print(directory_music_size(({ "my documents":30, "music":{"zohar argov":10, "avihu pinhasov":20}})))      
+print(directory_music_size(({"more_music":40, "music":{"zohar argov":10, "avihu pinhasov":20}})))      
+print(directory_music_size(({"more_music":40, "music":{"zohar argov":10, "avihu pinhasov":20},"just a folder":{"new1":5,"new2":6,"new_last":7,"new_music":9}})))      
+
+
 
 # q4.a
 def distance(row1, col1, row2, col2):
@@ -122,7 +151,6 @@ def add_tower(board, d, row, col):
 def n_towers(n, d):
     # Delete the pass command and insert you code below
     pass
-
 
 # input_list = [1,6,52,8]
 # result = 3
