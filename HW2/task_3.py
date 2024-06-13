@@ -131,22 +131,36 @@ def directory_music_size(dir,is_music=False):
     
     return total_folder_size
 
-print(directory_music_size(({ "my documents":30, "music":{"zohar argov":10, "avihu pinhasov":20}})))      
-print(directory_music_size(({"more_music":40, "music":{"zohar argov":10, "avihu pinhasov":20}})))      
-print(directory_music_size(({"more_music":40, "music":{"zohar argov":10, "avihu pinhasov":20},"just a folder":{"new1":5,"new2":6,"new_last":7,"new_music":9}})))      
+# print(directory_music_size(({ "my documents":30, "music":{"zohar argov":10, "avihu pinhasov":20}})))      
+# print(directory_music_size(({"more_music":40, "music":{"zohar argov":10, "avihu pinhasov":20}})))      
+# print(directory_music_size(({"more_music":40, "music":{"zohar argov":10, "avihu pinhasov":20},"just a folder":{"new1":5,"new2":6,"new_last":7,"new_music":9}})))      
 
 
 
 # q4.a
 def distance(row1, col1, row2, col2):
-    # Delete the pass command and insert you code below
-    pass
+    row_distance = row1 - row2 
+    col_distance = col1 - col2
+    if row_distance < 0:
+        row_distance = row_distance*(-1)
+    if col_distance < 0:
+        col_distance = col_distance*(-1)
+
+    return col_distance + row_distance
+
+print(distance(2, 4, 5, 5))
 
 # q4.b
 def add_tower(board, d, row, col):
-    # Delete the pass command and insert you code below
-    pass
+    add_tower = True
+    for row_tower, col_tower in enumerate(board):
+        if d >= distance(row_tower, col_tower, row, col):
+            add_tower = False
+    return True
 
+board = [0, 3, 5, 1, 0, 0]
+
+print(add_tower(board,2,3,1))
 # q4.c
 def n_towers(n, d):
     # Delete the pass command and insert you code below
