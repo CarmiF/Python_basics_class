@@ -1,28 +1,31 @@
+import copy
 # q1.a
 def linear_sum(x, result):
-    if x == []:
-        return False
     if result == 0:
         return True
+    if x == []:
+        return False
     
     with_x0 = linear_sum(x[1:], result- x[0])
-    if with_x0 == True:
+    no_x0 = linear_sum(x[1:], result)
+    
+    if with_x0 == True or no_x0 == True:
         return True
     else:
-        no_x0 = linear_sum(x[1:], result)
-    return no_x0
+        return False
+    
+
+# print(linear_sum( [1, 2, 3, 4, 5], 11))
+# print("f")
 
 # q1.b
 def return_sliced_str(str, char):
-    # if char in str:
     if char in str[0]:
         return str[2:]
     else: 
         return return_sliced_str(str[1:],char)
-    # else:
-    #     return str[1:]
+    
 def ordered_subset(str1,str2):
-    # print(str1,str2)
     if str2== "":
         return True
     if str1 == "":
@@ -32,37 +35,9 @@ def ordered_subset(str1,str2):
         return ordered_subset(return_sliced_str(str1, str2[0]), str2[1:])
     return False
 
-# print(ordered_subset("ladbcfe", "abc"))
-# # input_list = [1,6,52,8]
-# # result = 3
-# # print(linear_sum(input_list, result)) 
-# print(ordered_subset("ladbcfe","abc"))
-# # False
-# print(ordered_subset("adbcfe","bc"))
-# # False
-# print(ordered_subset("bcfe","c"))
-# # true
-# print(ordered_subset("cfe",""))
-# #  true
-# print(ordered_subset("ladbxcfe","abc"))
-# # true
-# print(ordered_subset("ladbcfe","abc"))
-# # false
-# print(ordered_subset("adbxcfe","c"))
-# # true
-# print(ordered_subset("cfe",""))
-# # true
-
-# ladbcfe abc
-# adbcfe bc
-# bcfe c
-# cfe 
-# ladbxcfe abc
-# adbxcfe bc
-# bxcfe c
-# cfe 
 # q2.a
 def find_max_from_list(lst):
+
     if len(lst)!= 1:
         if(lst[0]<=lst[1]):
             lst = find_max_from_list(lst[1:])
@@ -71,48 +46,86 @@ def find_max_from_list(lst):
             lst = find_max_from_list(lst)
     return lst
     # print(find_max_from_list([3,2,10,4,5,6]))
+
+def find_zero_time_and_sum_grades(lst, grade):
+        print("activate")
+        if len(lst) == 0:
+            return grade
+        if (lst[0])[0] == 0:
+            grade = grade + (lst[0])[1]
+        grade = find_zero_time_and_sum_grades(lst[1:], grade)
+        return grade
+
+# print(find_zero_time_and_sum_grades([[0, 5], [20, 5], [10, 3]], 0))
+
 def solve_test(questions, total_time):
     grade_with = 0
     grade_keeper = 0
-    if len(questions)==0:
-        return grade_with
-    if total_time < 0:
+
+    if len(questions) == 1 or  total_time <= 0:
+        if len(questions)>1:
+                # grade_with = grade_with +  find_zero_time_and_sum_grades(0, questions[1:])
+                grade_with=0
+        else:
+            if (questions[0])[0]<= total_time:
+                grade_with = grade_with + (questions[0])[1]
+        # print(grade_with)
         return grade_with
     
     if (questions[0])[0]<= total_time:
         grade_keeper = (questions[0])[1]
+
+    # print("grade kepper" + str(grade_keeper))
+    # print(questions)
     with_x0 = solve_test(questions[1:], total_time - (questions[0])[0])
-    grade_with = grade_keeper + with_x0
+    grade_with = grade_keeper + with_x0 + grade_with
     no_x0 = solve_test(questions[1:], total_time) 
-    
+
+    # print(grade_with , no_x0)
     if grade_with > no_x0:
         return grade_with
     else:
         return no_x0 
 
+# print(solve_test([[15, 10], [20, 5], [10, 3]], 25))
+
+
 # q2.b
 def floor_half(num):
     if num - int(num) == 0.5:
-        return num-0.5
+        return int(num-0.5)
     else:
-        return num
-
+        return int(num)
 def solve_test_with_factor_helper(questions, total_time, index_to_change, grade_old):
     
     if len(questions) == index_to_change:
         return grade_old
-    questions_to_send = questions
-    (questions_to_send[index_to_change])[0]=0
+    
+    if index_to_change == -1:
+        grade_new = solve_test(questions, total_time)
+    else:
+        fix_time = (questions[index_to_change])[0]
+        (questions[index_to_change])[0]=0
+        fix_grade =  (questions[index_to_change])[1]
+        (questions[index_to_change])[1]= floor_half(((questions[index_to_change])[1])/2)
+        grade_new = solve_test(questions, total_time)
 
-    (questions_to_send[index_to_change])[1]= floor_half(((questions[index_to_change])[1])/2)
-    grade_new = solve_test(questions_to_send, total_time)
+
+    # print(questions_to_send, total_time)
+    # print(grade_new)
     if grade_new > grade_old:
         grade_old = grade_new    
+    if index_to_change > -1:
+        (questions[index_to_change])[0] = fix_time
+        (questions[index_to_change])[1] = fix_grade
+
     return solve_test_with_factor_helper(questions, total_time, index_to_change+1, grade_old)
 
 def solve_test_with_factor(questions, total_time):
-    return solve_test_with_factor_helper(questions, total_time, 0, 0)  
-# print(solve_test_with_factor([[20,5], [40,9] ,[35,8] ,[35,7]], 55))
+    return solve_test_with_factor_helper(questions, total_time, -1, 0)  
+
+print(solve_test_with_factor([[10, 2], [20, 4], [30, 6]], 60))
+
 
 # q3.a
 def directory_depth_helper(dir):
@@ -131,16 +144,18 @@ def directory_depth_helper(dir):
 def directory_depth(dir):
     if not isinstance(dir, dict):
         return("dir is not a dict")
-    
-    return (directory_depth_helper(dir)-1)
+    directory_depth = directory_depth_helper(dir) -1
+    if directory_depth < 0:
+        directory_depth = 0 
+    return int(directory_depth)
     
 
+# print(directory_depth({}))
 
 # print(directory_depth({"a": 1, "b":2}))
 # print(directory_depth({"c": {"a":1, "b":2}}))
 # print(directory_depth({"c": {"a": 1, "b": 2}, "d": {"c": {"a": 1, "b": 2}, "b": 2}}))
 # print(directory_depth({"a": {"a":1, "b":2}, "b":2}))
-# print(directory_depth(3))
 
 # q3.b
 def directory_music_size(dir,is_music=False):
@@ -163,9 +178,6 @@ def directory_music_size(dir,is_music=False):
     
     return total_folder_size
 
-# print(directory_music_size(({ "my documents":30, "music":{"zohar argov":10, "avihu pinhasov":20}})))      
-# print(directory_music_size(({"more_music":40, "music":{"zohar argov":10, "avihu pinhasov":20}})))      
-# print(directory_music_size(({"more_music":40, "music":{"zohar argov":10, "avihu pinhasov":20},"just a folder":{"new1":5,"new2":6,"new_last":7,"new_music":9}})))      
 
 
 
@@ -180,8 +192,6 @@ def distance(row1, col1, row2, col2):
 
     return col_distance + row_distance
 
-# print(distance(2, 4, 5, 5))
-
 # q4.b
 def add_tower(board, d, row, col):
     if d< len(board):
@@ -195,51 +205,38 @@ def add_tower(board, d, row, col):
         board[row]= col
         return True
     return False
-
-
-
-# board = [0, 3, 5, 0, 0, 0]
-# print(add_tower([0, 3, 5, 0, 0, 0],2,3,3))
-# board = [0, 3, 5, 1, 0, 0]
-# print(add_tower(board,2,3,1)) 
-
 # q4.c
-
-def n_tower_helper(n, d, board, row ,col):
+def n_tower_helper(iteration_num, n, d, board, row ,col):
     if n == 0:
-        return 0
+        return board
     # print(n, d, board, row ,col)
     # print(add_tower(board, d, row, col))
     if add_tower(board, d, row, col):
         board[row]= col
         col = 0 
-        n_tower_helper(n-1, d, board, row+1 ,col)
+        outcome = n_tower_helper(iteration_num, n-1, d, board, row+1 ,col)
     else:
         if col == len(board)-1:
-            col = 0 
-            n_tower_helper(n-1, d, board, row+1 ,col)
+            if iteration_num == len(board)-1:
+                return [] 
+            outcome = n_tower_helper(iteration_num+1, len(board), d, board, 0 ,iteration_num+1)
         else:
-            n_tower_helper(n, d, board, row ,col+1) 
+            outcome = n_tower_helper(iteration_num, n, d, board, row ,col+1) 
 
-    return board
+    return outcome
     
 
 def n_towers(n, d):
     board = [0]
     board = board * n
     if d < n:
-        return n_tower_helper(n, d, board, 0, 0)
+        return n_tower_helper(0, n, d, board, 0, 0)
     else:
         return []
+       
 
-# print(distance(0, 0, 1, 1))
-
-# print(distance(2, 4, 5, 5))
-# print(add_tower([0,0,0,0,0,0],1,3,0)) 
-# print(n_towers(6,1))
-# print(n_towers(6,2))
-# print(n_towers(6,3))
-# print(n_towers(6,4))
-# print(n_towers(6,5))
-# print(n_towers(6,6))
-
+# print(n_towers(4,2))
+# input_list = [1,6,52,8]
+# result = 3
+# print(linear_sum(input_list, result)) 
+# print(ordered_subset("ladbxcfe","abc"))
