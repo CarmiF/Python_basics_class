@@ -14,14 +14,15 @@ def linear_sum(x, result):
 
 # q1.b
 def return_sliced_str(str, char):
-    if char in str:
-        if char in str[0]:
-            return str
-        else: 
-            return return_sliced_str(str[1:],char)
-    else:
-        return False
+    # if char in str:
+    if char in str[0]:
+        return str[2:]
+    else: 
+        return return_sliced_str(str[1:],char)
+    # else:
+    #     return str[1:]
 def ordered_subset(str1,str2):
+    # print(str1,str2)
     if str2== "":
         return True
     if str1 == "":
@@ -31,6 +32,35 @@ def ordered_subset(str1,str2):
         return ordered_subset(return_sliced_str(str1, str2[0]), str2[1:])
     return False
 
+# print(ordered_subset("ladbcfe", "abc"))
+# # input_list = [1,6,52,8]
+# # result = 3
+# # print(linear_sum(input_list, result)) 
+# print(ordered_subset("ladbcfe","abc"))
+# # False
+# print(ordered_subset("adbcfe","bc"))
+# # False
+# print(ordered_subset("bcfe","c"))
+# # true
+# print(ordered_subset("cfe",""))
+# #  true
+# print(ordered_subset("ladbxcfe","abc"))
+# # true
+# print(ordered_subset("ladbcfe","abc"))
+# # false
+# print(ordered_subset("adbxcfe","c"))
+# # true
+# print(ordered_subset("cfe",""))
+# # true
+
+# ladbcfe abc
+# adbcfe bc
+# bcfe c
+# cfe 
+# ladbxcfe abc
+# adbxcfe bc
+# bxcfe c
+# cfe 
 # q2.a
 def find_max_from_list(lst):
     if len(lst)!= 1:
@@ -66,6 +96,7 @@ def floor_half(num):
         return num-0.5
     else:
         return num
+
 def solve_test_with_factor_helper(questions, total_time, index_to_change, grade_old):
     
     if len(questions) == index_to_change:
@@ -78,6 +109,7 @@ def solve_test_with_factor_helper(questions, total_time, index_to_change, grade_
     if grade_new > grade_old:
         grade_old = grade_new    
     return solve_test_with_factor_helper(questions, total_time, index_to_change+1, grade_old)
+
 def solve_test_with_factor(questions, total_time):
     return solve_test_with_factor_helper(questions, total_time, 0, 0)  
 # print(solve_test_with_factor([[20,5], [40,9] ,[35,8] ,[35,7]], 55))
@@ -148,25 +180,66 @@ def distance(row1, col1, row2, col2):
 
     return col_distance + row_distance
 
-print(distance(2, 4, 5, 5))
+# print(distance(2, 4, 5, 5))
 
 # q4.b
 def add_tower(board, d, row, col):
-    add_tower = True
-    for row_tower, col_tower in enumerate(board):
-        if d >= distance(row_tower, col_tower, row, col):
-            add_tower = False
-    return True
+    if d< len(board):
+        add_tower = True
+        if row != 0:
+            cut_board = board[0:row]
+            for row_tower, col_tower in enumerate(cut_board):
+                # print(distance(row_tower, col_tower, row, col))
+                if d >= distance(row_tower, col_tower, row, col):
+                    return False
+        board[row]= col
+        return True
+    return False
 
-board = [0, 3, 5, 1, 0, 0]
 
-print(add_tower(board,2,3,1))
+
+# board = [0, 3, 5, 0, 0, 0]
+# print(add_tower([0, 3, 5, 0, 0, 0],2,3,3))
+# board = [0, 3, 5, 1, 0, 0]
+# print(add_tower(board,2,3,1)) 
+
 # q4.c
-def n_towers(n, d):
-    # Delete the pass command and insert you code below
-    pass
 
-# input_list = [1,6,52,8]
-# result = 3
-# print(linear_sum(input_list, result)) 
-# print(ordered_subset("ladbxcfe","abc"))
+def n_tower_helper(n, d, board, row ,col):
+    if n == 0:
+        return 0
+    # print(n, d, board, row ,col)
+    # print(add_tower(board, d, row, col))
+    if add_tower(board, d, row, col):
+        board[row]= col
+        col = 0 
+        n_tower_helper(n-1, d, board, row+1 ,col)
+    else:
+        if col == len(board)-1:
+            col = 0 
+            n_tower_helper(n-1, d, board, row+1 ,col)
+        else:
+            n_tower_helper(n, d, board, row ,col+1) 
+
+    return board
+    
+
+def n_towers(n, d):
+    board = [0]
+    board = board * n
+    if d < n:
+        return n_tower_helper(n, d, board, 0, 0)
+    else:
+        return []
+
+# print(distance(0, 0, 1, 1))
+
+# print(distance(2, 4, 5, 5))
+# print(add_tower([0,0,0,0,0,0],1,3,0)) 
+# print(n_towers(6,1))
+# print(n_towers(6,2))
+# print(n_towers(6,3))
+# print(n_towers(6,4))
+# print(n_towers(6,5))
+# print(n_towers(6,6))
+
