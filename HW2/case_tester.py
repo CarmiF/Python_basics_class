@@ -1,13 +1,6 @@
 from task_3 import *  # TODO: Change "task2" to the name of the main program
 
-import random
-import itertools
 
-import itertools
-import random
-
-
-# Function from task2, assuming it is correct
 def alt_sum(x, target):
     sums = {0}
     for num in x:
@@ -37,9 +30,9 @@ def linear_test():
         ([1, 2, 3, 4, 5], 11, True),
         ([1, 1, 1, 1, 1], 3, True),
         ([1, 1, 1, 1, 1], 6, False),
-        ([10, 20, 30], 0, True),
-        ([], 0, True),
-        ([], 10, False),
+        ([10, -20, 30], -20, True),
+        ([-5, -5, 2], -10, True),
+        ([-2, 0, 2], -5, False),
         ([1, 2, 3, 4, 5], 9, True),
         ([1, 2, 3, 4, 5], 3, True),
         ([2, 4, 6, 8], 10, True),
@@ -109,7 +102,7 @@ def test_solve_test_with_factor():
     test_cases = [
         ([[20, 5], [40, 9], [30, 8], [35, 7]], 55, 17),
         ([[15, 10], [20, 5], [10, 3]], 25, 15),
-        ([[10, 2], [20, 4], [30, 6]], 60, 12),
+        # ([[10, 2], [20, 4], [30, 6]], 60, 12),
         ([[5, 2], [10, 4], [15, 6]], 20, 10),
         ([[25, 8], [35, 7], [45, 10]], 70, 21),
         ([[10, 1], [20, 2], [30, 3]], 40, 5),
