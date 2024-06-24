@@ -16,6 +16,8 @@ def linear_sum(x, result):
         return True
     else:
         return False
+    
+print(linear_sum([10,20], 0))
 
 # q1.b
 # function taking string and a char. If the char in the string, return sliced string without the char and one index after it.  
