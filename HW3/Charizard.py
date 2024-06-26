@@ -59,7 +59,7 @@ class Charizard(Fire):
             return True
     
     def get_damage(self, other):
-        if self.get_effective_against_others == other.get_effective_against_me: 
+        if self.type_pokemon == other.get_effective_against_me(): 
             eff = 2
         else:
             eff = 0.5
@@ -83,7 +83,11 @@ class Charizard(Fire):
                 self.level = 50
             
 
-
-
-
-
+    def get_effective_against_me(self):
+            return self.effective_against_me
+    
+    def get_type(self):
+        return "Charizard"
+    
+    def get_level(self):
+            return self.level

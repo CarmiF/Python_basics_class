@@ -1,5 +1,5 @@
 
-
+from math import floor
 class Pokemon:
 
     def __init__(self, name, catch_rate):
@@ -7,49 +7,44 @@ class Pokemon:
         # if not isinstance(name, str) or isinstance(catch_rate, int):
         #     raise TypeError("Can't instantiate abstract class Pokemon with abstract methods __repr__, absorb, attack, can_fight, get_damage, get_defense_power, get_effective_against_me, get_effective_against_others, get_hit_points, get_pokemon_type,level_up")
         
-        if not 40 <= catch_rate <= 45:
-            raise ValueError
+        if not isinstance(name, str):
+            raise TypeError("name type wrong")
+        else: 
+            self.name = name
+
+
+        if not isinstance(catch_rate, int):
+            raise TypeError("catch_rate type wrong")
+        if 40 <= catch_rate <= 45:
+            self.catch_rate = catch_rate
+        else: 
+            raise ValueError("catch_rate must be 40 <= catch_rate <= 45")
         
-        self.name = name
-        self.catch_rate = catch_rate
 
-    def get_name(self):
-        return self.name
-    
-    
-    def get_catch_rate(self):
-        return self.catch_rate
+    def get_hit_points(self):
+        return self.hit_points
 
-
-    def __repr__(self):
-        pass
-    
-    def absorb(self):
-        pass
-    
-    def attack(self):
-        pass
+    def get_defense_power(self):
+        return self.defense_power
 
     def can_fight(self):
-        pass
-    def get_damage():
-        pass
+        if floor(self.start_life/10)>self.hit_points:
+            return False
+        else:
+            return True
     
-    def get_defense_power(self):
-        pass
-    def get_eQective_against_me(self):
-        pass
-    
-    def get_eQective_against_others(self): 
-        pass
-    
-    def get_hit_points(self):
-        pass
+    def attack(self, other):
+        if self.can_fight() and other.can_fight():
+            self.hit_points = self.hit_points - floor((self.start_life)*0.1)
+            other.absorb(self.get_damage(other))
 
-    def get_pokemon_type(self): 
-      pass
+    def absorb(self, damage):
+        self.hit_points = self.hit_points - damage
     
-    def level_up(self):
-        pass
-
+    def get_effective_against_me(self):
+        return self.effective_against_me
+    
+    
+    def get_level(self):
+        return self.level
 

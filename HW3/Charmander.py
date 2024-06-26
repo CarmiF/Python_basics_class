@@ -8,9 +8,7 @@ def type_message():
 
 class Charmander(Fire):
     def __init__(self, name, catch_rate, pokemon_type, level, hit_points, attack_power,defense_power):
-        # if not isinstance(level, int) or isinstance(hit_points, int) or isinstance(attack_power, int) or isinstance(defense_power, int):
-        #     raise TypeError("Can't instantiate abstract class Pokemon with abstract methods __repr__, absorb, attack, can_fight, get_damage, get_defense_power, get_effective_against_me, get_effective_against_others, get_hit_points, get_pokemon_type,level_up")
-        
+      
         if not isinstance(level, int):
             raise TypeError("level type wrong")
         if 1 <= level <= 15:
@@ -50,20 +48,11 @@ class Charmander(Fire):
         print("Charmander " + self.get_name() + " catch_rate: " + str(self.catch_rate) + " pokemon_type: " + " level: " + str(self.level) + " hit_points: " +  str(self.hit_points) + " attack_power: " + str(self.attack_power) + " defense_power: " + str(self.defense_power))
 
 
-    def get_hit_points(self):
-        return self.hit_points
-
-    def get_defense_power(self):
-        return self.defense_power
-
-    def can_fight(self):
-        if floor(self.start_life/10)>self.hit_points:
-            return False
-        else:
-            return True
+   
+    
     
     def get_damage(self, other):
-        if self.get_effective_against_others == other.get_effective_against_me: 
+        if self.type_pokemon == other.get_effective_against_me(): 
             eff = 2
         else:
             eff = 0.5
@@ -71,13 +60,8 @@ class Charmander(Fire):
         damage = floor((((2*self.level)/5)+2)*(self.attack_power/other.defense_power)*eff)
         return damage
 
-    def attack(self, other):
-        if self.can_fight() and other.can_fight():
-            self.hit_points = self.hit_points - floor((self.start_life)*0.1)
-            other.absorb(self.get_damage(other))
-
-    def absorb(self, damage):
-        self.hit_points = self.hit_points - damage
+   
+    
     
     def level_up(self, level_gain):
         if 0 < level_gain < 17:
@@ -90,6 +74,4 @@ class Charmander(Fire):
         return Charmeleon(self.name, self.catch_rate, "fire", self.level, self.hit_points +19 , self.attack_power +12 , self.defense_power + 15)
          
     
-   
-
-
+ 
