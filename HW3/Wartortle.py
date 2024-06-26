@@ -48,20 +48,20 @@ class Wartortle(Water):
         print("Wartortle " + self.get_name() + " catch_rate: " + str(self.catch_rate) + " pokemon_type: " + " level: " + str(self.level) + " hit_points: " +  str(self.hit_points) + " attack_power: " + str(self.attack_power) + " defense_power: " + str(self.defense_power))
 
 
-    def get_hit_points(self):
-        return self.hit_points
+    # def get_hit_points(self):
+    #     return self.hit_points
 
-    def get_defense_power(self):
-        return self.defense_power
+    # def get_defense_power(self):
+    #     return self.defense_power
     
-    def get_effective_against_me(self):
-        return self.effective_against_me
+    # def get_effective_against_me(self):
+    #     return self.effective_against_me
     
-    def can_fight(self):
-        if floor(self.start_life/10)>self.hit_points:
-            return False
-        else:
-            return True
+    # def can_fight(self):
+    #     if floor(self.start_life/10)>self.hit_points:
+    #         return False
+    #     else:
+    #         return True
     
     def get_damage(self, other):
         if self.type_pokemon == other.get_effective_against_me(): 
@@ -75,13 +75,13 @@ class Wartortle(Water):
         damage = floor((((2*self.level)/5)+2)*(self.attack_power / other.get_defense_power())*eff)-1
         return damage
 
-    def attack(self, other):
-        if self.can_fight() and other.can_fight():
-            self.hit_points = self.hit_points - floor((self.start_life)*0.1)
-            other.absorb(self.get_damage(other))
+    # def attack(self, other):
+    #     if self.can_fight() and other.can_fight():
+    #         self.hit_points = self.hit_points - floor((self.start_life)*0.1)
+    #         other.absorb(self.get_damage(other))
 
-    def absorb(self, damage):
-        self.hit_points = self.hit_points - damage
+    # def absorb(self, damage):
+    #     self.hit_points = self.hit_points - damage
     
     def level_up(self, level_gain):
         if 1 <= level_gain <= 16:
@@ -98,8 +98,8 @@ class Wartortle(Water):
     def get_type(self):
         return "Wartortle"
     
-    def get_level(self):
-        return self.level
-    def get_effective_against_me(self):
-        return self.effective_against_me
+    # def get_level(self):
+    #     return self.level
+    # def get_effective_against_me(self):
+    #     return self.effective_against_me
 

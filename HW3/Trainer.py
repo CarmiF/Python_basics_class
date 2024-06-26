@@ -24,6 +24,7 @@ class Trainer:
             raise ValueError("exp_modifier must be 1.5 <= exp_modifier <= 12.5")
         
         self.pokemons_lst = pokemons_lst
+        
     
     
     def __len__(self):
@@ -36,8 +37,9 @@ class Trainer:
             str_to_print  = "The Trainer " + self.name + " is "+ str(self.age) + " years old and has no pokimons yet"
 
         else: 
-
-            for pokemon in self.pokemons_lst:
+            print(isinstance(self.pokemons_lst[0],Pokemon))
+            print(type(self.pokemons_lst[0]))
+            for i, pokemon in enumerate(self.pokemons_lst):
                 str_pokemon_list = str_pokemon_list + "\n" +"The "+ pokemon.get_type() +" "+ str(pokemon.get_name()) + " of level " + str(pokemon.get_level()) + " with " + str(pokemon.get_hit_points()) + " HP." 
             str_to_print  = "The Trainer " + self.name + " is "+ str(self.age) + " years old and has the following pokemons ("+ str(len(self.pokemons_lst)) + " in total): "
 
@@ -67,7 +69,7 @@ class Trainer:
             if self.pokemons_lst == None:
                 self.pokemons_lst = [pokemon]
             else:
-                self.pokemons_lst.append(pokemon)
+                self.add_pokemon(pokemon)
             print(self.name + " caught " + pokemon.get_name())
         else:
             print(self.name + " couldn't caught " + pokemon.get_name())
@@ -115,6 +117,10 @@ class Trainer:
            return True
        else:
            return False
+       
+    def __iadd__(self, other):
+        self = self + other
+        return self
 
     def operators_helper(self, other):
         self_hp = 0
@@ -127,21 +133,21 @@ class Trainer:
             other_hp = pokemon.get_hit_points() + other_hp
         return self_hp, other_hp
 
-    
+    def add_pokemon(self, pokemon):
+        if self.pokemons_lst == None:
+            self.pokemons_lst = [pokemon]
+        else:
+            self.pokemons_lst.append(pokemon)
+
     def __add__(self, other):
         name = self.name + " " + other.get_name()
         age = floor((self.age + other.get_age())/2)
-        exp_modifier = float(floor((self.exp_modifier + other.exp_modifier)/2))
-        print(self.get_pokemon_lst())
-        print("fsfes")
-        updated_pokemons_lst = []
+        exp_modifier = float(((self.exp_modifier + other.exp_modifier)/2))
         if self >= other:
-            updated_pokemons_lst.append(self.get_pokemon_lst())
-            updated_pokemons_lst.append(other.get_pokemon_lst()) 
+            updated_pokemons_lst = self.get_pokemon_lst() + other.get_pokemon_lst()
         else:
-            updated_pokemons_lst.append(other.get_pokemon_lst())        
-            updated_pokemons_lst.append(self.get_pokemon_lst())
-        print(updated_pokemons_lst)
+            updated_pokemons_lst = other.get_pokemon_lst() +self.get_pokemon_lst()
+
        
         del self, other
         new_trainer = Trainer(name, age, exp_modifier)

@@ -46,17 +46,17 @@ class Charizard(Fire):
         return "The Charizard " + self.get_name() + "of" + self.level + " with " + self.hit_points + " HP."
 
 
-    def get_hit_points(self):
-        return self.hit_points
+    # def get_hit_points(self):
+    #     return self.hit_points
 
-    def get_defense_power(self):
-        return self.defense_power
+    # def get_defense_power(self):
+    #     return self.defense_power
 
-    def can_fight(self):
-        if floor(self.hit_points/10)>self.life:
-            return False
-        else:
-            return True
+    # def can_fight(self):
+    #     if floor(self.hit_points/10)>self.life:
+    #         return False
+    #     else:
+    #         return True
     
     def get_damage(self, other):
         if self.type_pokemon == other.get_effective_against_me(): 
@@ -67,13 +67,13 @@ class Charizard(Fire):
         damage = floor((((2*self.level)/5)+2)*(self.attack_power/other.defense_power)*eff + 4)
         return damage
 
-    def attack(self, other):
-        if self.can_fight() and other.can_fight():
-            self.life = (self.life)*0.9
-            other.absorb(self.get_damage)
+    # def attack(self, other):
+    #     if self.can_fight() and other.can_fight():
+    #         self.life = (self.life)*0.9
+    #         other.absorb(self.get_damage)
 
-    def absorb(self, damage):
-        self.life = self.life - damage
+    # def absorb(self, damage):
+    #     self.life = self.life - damage
     
     def level_up(self, level_gain):
         if 0 < level_gain:
@@ -83,11 +83,11 @@ class Charizard(Fire):
                 self.level = 50
             
 
-    def get_effective_against_me(self):
-            return self.effective_against_me
+    # def get_effective_against_me(self):
+    #         return self.effective_against_me
     
     def get_type(self):
         return "Charizard"
     
-    def get_level(self):
-            return self.level
+    # def get_level(self):
+    #         return self.level

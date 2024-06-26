@@ -44,7 +44,17 @@ class Pokemon:
     def get_effective_against_me(self):
         return self.effective_against_me
     
-    
+    def get_name(self):
+        return self.name
+
     def get_level(self):
         return self.level
+    
+    def __repr__(self):
+        return "The " + self.get_type() + " " +  self.get_name() + " of " + str(self.level) + " with " + str(self.hit_points) + " HP."
+    
+    def full_print(self):
+        print(self.get_type() + " " + self.get_name() + " catch_rate: " + str(self.catch_rate) + " pokemon_type: " + " level: " + str(self.level) + " hit_points: " +  str(self.hit_points) + " attack_power: " + str(self.attack_power) + " defense_power: " + str(self.defense_power))
+
+
 

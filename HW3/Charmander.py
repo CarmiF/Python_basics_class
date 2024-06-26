@@ -41,11 +41,11 @@ class Charmander(Fire):
         self.start_life = self.hit_points
 
 
-    def __repr__(self):
-        return "The Charmander " + self.get_name() + " of " + str(self.level) + " with " + str(self.hit_points) + " HP."
+    # def __repr__(self):
+    #     return "The Charmander " + self.get_name() + " of " + str(self.level) + " with " + str(self.hit_points) + " HP."
     
-    def full_print(self):
-        print("Charmander " + self.get_name() + " catch_rate: " + str(self.catch_rate) + " pokemon_type: " + " level: " + str(self.level) + " hit_points: " +  str(self.hit_points) + " attack_power: " + str(self.attack_power) + " defense_power: " + str(self.defense_power))
+    # def full_print(self):
+    #     print("Charmander " + self.get_name() + " catch_rate: " + str(self.catch_rate) + " pokemon_type: " + " level: " + str(self.level) + " hit_points: " +  str(self.hit_points) + " attack_power: " + str(self.attack_power) + " defense_power: " + str(self.defense_power))
 
 
    
