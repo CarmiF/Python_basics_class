@@ -48,12 +48,7 @@ class Pikachu(Electric):
         self.start_life = self.hit_points
 
 
-    def __repr__(self):
-        return "The Pikachu " + self.get_name() + " of " + str(self.level) + " with " + str(self.hit_points) + " HP."
-    
-    def full_print(self):
-        print("Pikachu " + self.get_name() + " catch_rate: " + str(self.catch_rate) + " pokemon_type: " + " level: " + str(self.level) + " hit_points: " +  str(self.hit_points) + " attack_power: " + str(self.attack_power) + " defense_power: " + str(self.defense_power))
-
+   
     def get_type(self):
         return "Pikachu"
     
@@ -73,7 +68,7 @@ class Pikachu(Electric):
     #         return True
     
     def get_damage(self, other):
-        if self.type_pokemon == other.get_effective_against_me(): 
+        if self.type_pokemon in other.get_effective_against_me(): 
             eff = 2
         else:
             eff = 0.5

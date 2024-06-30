@@ -1,5 +1,7 @@
 from Pokemon import Pokemon
+import copy
 from math import floor
+
 class Trainer:
 
     def __init__(self, name, age, exp_modifier, pokemons_lst=None):
@@ -23,7 +25,7 @@ class Trainer:
         else: 
             raise ValueError("exp_modifier must be 1.5 <= exp_modifier <= 12.5")
         
-        self.pokemons_lst = pokemons_lst
+        self.pokemons_lst = copy.deepcopy(pokemons_lst)
         
     
     
@@ -37,8 +39,8 @@ class Trainer:
             str_to_print  = "The Trainer " + self.name + " is "+ str(self.age) + " years old and has no pokimons yet"
 
         else: 
-            print(isinstance(self.pokemons_lst[0],Pokemon))
-            print(type(self.pokemons_lst[0]))
+            # print(isinstance(self.pokemons_lst[0],Pokemon))
+            # print(type(self.pokemons_lst[0]))
             for i, pokemon in enumerate(self.pokemons_lst):
                 str_pokemon_list = str_pokemon_list + "\n" +"The "+ pokemon.get_type() +" "+ str(pokemon.get_name()) + " of level " + str(pokemon.get_level()) + " with " + str(pokemon.get_hit_points()) + " HP." 
             str_to_print  = "The Trainer " + self.name + " is "+ str(self.age) + " years old and has the following pokemons ("+ str(len(self.pokemons_lst)) + " in total): "
@@ -63,8 +65,8 @@ class Trainer:
         return self
     
     def catch_pokemon(self, pokemon):
-        capture_chances = 100 - (100 - pokemon.catch_rate * self.exp_modifier * (pokemon.get_hit_points()/200))
-        print(capture_chances)
+        capture_chances =(pokemon.catch_rate * self.exp_modifier * ((100-pokemon.get_hit_points())/100))
+        # print(capture_chances)
         if capture_chances > 50:
             if self.pokemons_lst == None:
                 self.pokemons_lst = [pokemon]
@@ -105,7 +107,7 @@ class Trainer:
        
     def __ge__(self, other):
        self_hp, other_hp = self.operators_helper(other)
-       print( self_hp, other_hp)
+    #    print( self_hp, other_hp)
        if self_hp >= other_hp:
            return True
        else:
@@ -134,10 +136,11 @@ class Trainer:
         return self_hp, other_hp
 
     def add_pokemon(self, pokemon):
+        pok_to_add = copy.deepcopy(pokemon)
         if self.pokemons_lst == None:
-            self.pokemons_lst = [pokemon]
+            self.pokemons_lst = [pok_to_add]
         else:
-            self.pokemons_lst.append(pokemon)
+            self.pokemons_lst.append(pok_to_add)
 
     def __add__(self, other):
         name = self.name + " " + other.get_name()

@@ -43,8 +43,8 @@ class Blastoise(Water):
     def __repr__(self):
         return "The Blastoise " + self.get_name() + " of " + str(self.level) + " with " + str(self.hit_points) + " HP."
     
-    def full_print(self):
-        print("Blastoise " + self.get_name() + " catch_rate: " + str(self.catch_rate) + " pokemon_type: " + " level: " + str(self.level) + " hit_points: " +  str(self.hit_points) + " attack_power: " + str(self.attack_power) + " defense_power: " + str(self.defense_power))
+    # def full_print(self):
+    #     print("Blastoise " + self.get_name() + " catch_rate: " + str(self.catch_rate) + " pokemon_type: " + " level: " + str(self.level) + " hit_points: " +  str(self.hit_points) + " attack_power: " + str(self.attack_power) + " defense_power: " + str(self.defense_power))
 
 
     # def get_hit_points(self):
@@ -60,7 +60,7 @@ class Blastoise(Water):
     #         return True
     
     def get_damage(self, other):
-        if self.type_pokemon == other.get_effective_against_me(): 
+        if self.type_pokemon in other.get_effective_against_me(): 
             eff = 2
         else:
             eff = 0.5

@@ -39,11 +39,11 @@ class Charizard(Fire):
             ValueError("Defense_power must be 42< defense_power < 58")
         
         Fire.__init__(self, name, catch_rate,  pokemon_type)
-        self.life = self.hit_points
+        self.start_life = self.hit_points
 
 
-    def __repr__(self):
-        return "The Charizard " + self.get_name() + "of" + self.level + " with " + self.hit_points + " HP."
+    # def __repr__(self):
+    #     return "The Charizard " + self.get_name() + "of" + self.level + " with " + self.hit_points + " HP."
 
 
     # def get_hit_points(self):
@@ -59,7 +59,7 @@ class Charizard(Fire):
     #         return True
     
     def get_damage(self, other):
-        if self.type_pokemon == other.get_effective_against_me(): 
+        if self.type_pokemon in other.get_effective_against_me(): 
             eff = 2
         else:
             eff = 0.5
