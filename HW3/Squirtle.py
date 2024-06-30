@@ -18,24 +18,24 @@ class Squirtle(Water):
         
         if not isinstance(hit_points, int):
             raise TypeError("hit_points type wrong")
-        if 39 <= hit_points <= 57:
+        if 44 <= hit_points <= 58:
             self.hit_points = hit_points
         else:
-             ValueError("hit_points must be 38 < hit_points < 58")
+             ValueError("hit_points must be 44 <= hit_points <= 58")
         
         if not isinstance(attack_power, int):
             raise TypeError("hit_points type wrong")
-        if 52 <= attack_power <= 63:
+        if 48 <= attack_power <= 62:
             self.attack_power = attack_power
         else:
-            ValueError("attack_power must be 51 < attack_power <64")
+            ValueError("attack_power must be 48 <= attack_power <= 62")
         
         if not isinstance(defense_power, int):
             raise TypeError("hit_points type wrong")
-        if 43 <= defense_power <= 57:
+        if 65 <= defense_power <= 79:
             self.defense_power = defense_power
         else:
-            ValueError("Defense_power must be 42< defense_power < 58")
+            ValueError("Defense_power must be 65 <= defense_power <= 79")
         
         super().__init__(name, catch_rate,  pokemon_type)
         self.start_life = self.hit_points
