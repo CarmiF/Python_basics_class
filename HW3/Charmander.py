@@ -3,8 +3,6 @@ from Fire import Fire
 from math import floor
 from Charmeleon import Charmeleon
 
-# def type_message():
-#     return "Can't instantiate abstract class Pokemon with abstract methods __repr__, absorb, attack, can_fight, get_damage, get_defense_power, get_effective_against_me, get_effective_against_others, get_hit_points, get_pokemon_type,level_up"
 
 class Charmander(Fire):
     def __init__(self, name, catch_rate, pokemon_type, level, hit_points, attack_power,defense_power):
@@ -46,14 +44,9 @@ class Charmander(Fire):
    
     
     
+     
     def get_damage(self, other):
-        if self.type_pokemon in other.get_effective_against_me(): 
-            eff = 2
-        else:
-            eff = 0.5
-        
-        damage = floor((((2*self.level)/5)+2)*(self.attack_power/other.defense_power)*eff)
-        return damage
+        return self.get_basic_damage(other)
 
    
     
@@ -66,6 +59,10 @@ class Charmander(Fire):
 
     
     def evolve(self):
+        if self.hit_points + 19 > 77:
+            self.hit_points = 57
+        elif self.hit_points + 19 < 58:
+            self.hit_points = 40
         return Charmeleon(self.name, self.catch_rate, "fire", self.level, self.hit_points +19 , self.attack_power +12 , self.defense_power + 15)
          
     

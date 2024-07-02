@@ -1,5 +1,6 @@
 from Pokemon import Pokemon_helper
 from abc import abstractmethod
+import copy
 
 
 class Fire(Pokemon_helper):
@@ -11,16 +12,16 @@ class Fire(Pokemon_helper):
         
         super().__init__(name, catch_rate)
        
-        self.type_pokemon = "fire"
-        self.effective_against_me = ["water"]
-        self.effective_against_others = []
+        self.__type_pokemon = "fire"
+        self.__effective_against_me = ["water"]
+        self.__effective_against_others = []
 
    def get_pokemon_type(self):
-     return self.type_pokemon
+     return copy.deepcopy(self.__type_pokemon)
+
+   def get_effective_against_others(self):
+     return copy.deepcopy(self.__effective_against_others)
  
    def get_effective_against_me(self):
-     return self.effective_against_me
- 
-   def get_effective_against_others(self):
-     return self.effective_against_others
+     return copy.deepcopy(self.__effective_against_me)
  

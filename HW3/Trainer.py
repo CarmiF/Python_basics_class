@@ -33,21 +33,20 @@ class Trainer:
         return len(self.pokemons_lst)
 
     def __repr__(self):
-        str_pokemon_list = ""
+        str1_to_print = ""
         if self.pokemons_lst == None:
             str_pokemon_list = ""
-            str_to_print  = "The Trainer " + self.name + " is "+ str(self.age) + " years old and has no pokimons yet"
+            str_to_print  = "The Trainer " + self.name + " is "+ str(self.age) + " years old and has the following pokemons (0 in total):"
 
         else: 
-            # print(isinstance(self.pokemons_lst[0],Pokemon))
-            # print(type(self.pokemons_lst[0]))
+          
+            str_to_print =  f"The Trainer {self.name} is {str(self.age)} years old and has the following pokemons ({str(len(self.pokemons_lst))} in total):"
             for i, pokemon in enumerate(self.pokemons_lst):
-                str_pokemon_list = str_pokemon_list + "\n" +"The "+ pokemon.get_type() +" "+ str(pokemon.get_name()) + " of level " + str(pokemon.get_level()) + " with " + str(pokemon.get_hit_points()) + " HP." 
-            str_to_print  = "The Trainer " + self.name + " is "+ str(self.age) + " years old and has the following pokemons ("+ str(len(self.pokemons_lst)) + " in total): "
+                str1_to_print = str1_to_print+f"\n    The {pokemon.get_type()} {str(pokemon.get_name())} of level {str(pokemon.get_level())} with {str(pokemon.get_hit_points())} HP" 
 
+        return f"{str_to_print}{str1_to_print}"
         
-        return str_to_print + str_pokemon_list
-    
+
     def get_name(self):
         return self.name
 
@@ -74,7 +73,7 @@ class Trainer:
                 self.add_pokemon(pokemon)
             print(self.name + " caught " + pokemon.get_name())
         else:
-            print(self.name + " couldn't caught " + pokemon.get_name())
+            print(self.name + " couldn't catch " + pokemon.get_name())
 
     def __eq__(self, other):
        self_hp, other_hp = self.operators_helper(other)
@@ -121,7 +120,7 @@ class Trainer:
            return False
        
     def __iadd__(self, other):
-        self = self + other
+        self = other + self
         return self
 
     def operators_helper(self, other):
@@ -143,7 +142,7 @@ class Trainer:
             self.pokemons_lst.append(pok_to_add)
 
     def __add__(self, other):
-        name = self.name + " " + other.get_name()
+        name = other.name + "-" + self.get_name()
         age = floor((self.age + other.get_age())/2)
         exp_modifier = float(((self.exp_modifier + other.exp_modifier)/2))
         if self >= other:

@@ -38,10 +38,12 @@ class Battle:
 
         round_num = 0
         winning_pokemon = "fight go on"
+
+        winning_pokemon = self.check_can_fight(pokemon_trainer1, pokemon_trainer2)
         while(winning_pokemon == "fight go on"):
             round_num = round_num +1
             pokemon_trainer1.attack(pokemon_trainer2)
-            
+
             winning_pokemon = self.check_can_fight(pokemon_trainer1, pokemon_trainer2)
             if winning_pokemon != "fight go on":
                 break
@@ -74,47 +76,46 @@ class Battle:
                             if chosen_pok.get_damage(opponent_pok) < pok.get_damage(opponent_pok):
                                 chosen_pok =pok
                                 chosen_pok_index = i
-                    return chosen_pok, chosen_pok_index
+                    if chosen_pok.can_fight():
+                        return chosen_pok, chosen_pok_index
         return -1,-1
 
 
 
 
     def total_battle(self):
-        trainer1 = self.trainer1
-        trainer2= self.trainer2
+       
         round_result = 0
         win = False
         trainer_won = 0
         while win == False:
-
+            print(trainer_won)
             if trainer_won == 0:
-                pok1,pok1_i = self.chose_pokemon_can_fight(trainer1)
-                if isinstance(pok1, Pokemon):
-                    pok2, pok2_i = self.most_damage_pokemon(trainer2, pok1)
+                self.trainer1.pok1 ,pok1_i = self.chose_pokemon_can_fight(self.trainer1)
+                if isinstance(self.trainer1.pok1, Pokemon):
+                    self.trainer2.pok2, pok2_i = self.most_damage_pokemon(self.trainer2, self.trainer1.pok1)
                 else:
-                    pok2, pok2_i = self.chose_pokemon_can_fight(trainer2)
+                    self.trainer2.pok2, pok2_i = self.chose_pokemon_can_fight(self.trainer2)
             else:
                 if trainer_won == 1:
-                    pok2, pok2_i = self.most_damage_pokemon(trainer2, pok1)
+                    self.trainer2.pok2, pok2_i = self.most_damage_pokemon(self.trainer2, self.trainer1.pok1)
                 if trainer_won == 2:
-                    pok1,pok1_i = self.most_damage_pokemon(trainer1, pok2)
-            
-            if isinstance(pok1, int) and isinstance(pok2, int):
+                    self.trainer1.pok1,pok1_i = self.most_damage_pokemon(self.trainer1, self.trainer2.pok2)
+            print(pok1_i, pok2_i)
+            if isinstance(self.trainer1.pok1, int) and isinstance(self.trainer2.pok2, int):
                 win = True
                 return "The battle ended with a draw"
-            if isinstance(pok1, int):
+            if isinstance(self.trainer1.pok1, int):
                 win = True
-                return trainer2.get_name() + " won the battle in  "+ str(round_result) +" rounds"
-            if isinstance(pok2, int):
+                return self.trainer2.pok2.get_name() + " won the battle in  "+ str(round_result) +" rounds"
+            if isinstance(self.trainer2.pok2, int):
                 win = True
-                return trainer1.get_name() + " won the battle in " + str(round_result) +" rounds"
+                return self.trainer1.get_name() + " won the battle in " + str(round_result) +" rounds"
             
             fight_tuple = self.dual_battle(pok1_i ,pok2_i)
-            round_result = int(fight_tuple[0]) + round_result
+            round_result = fight_tuple[0] + round_result
             trainer_won = fight_tuple[1]
-            if round_result< 30:
-                print(fight_tuple , round_result)
+            print(fight_tuple , round_result)
 
 
         

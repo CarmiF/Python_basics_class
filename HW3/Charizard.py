@@ -2,14 +2,9 @@
 from Fire import Fire
 from math import floor
 
-def type_message():
-    return "Can't instantiate abstract class Pokemon with abstract methods __repr__, absorb, attack, can_fight, get_damage, get_defense_power, get_effective_against_me, get_effective_against_others, get_hit_points, get_pokemon_type,level_up"
-
 class Charizard(Fire):
     def __init__(self, name, catch_rate, pokemon_type, level, hit_points, attack_power,defense_power):
-        # if not isinstance(level, int) or isinstance(hit_points, int) or isinstance(attack_power, int) or isinstance(defense_power, int):
-        #     raise TypeError("Can't instantiate abstract class Pokemon with abstract methods __repr__, absorb, attack, can_fight, get_damage, get_defense_power, get_effective_against_me, get_effective_against_others, get_hit_points, get_pokemon_type,level_up")
-
+       
         if not isinstance(level, int):
             raise TypeError("level type wrong")
         if 32 <= level <= 50:
@@ -38,42 +33,11 @@ class Charizard(Fire):
         else:
             ValueError("Defense_power must be 42< defense_power < 58")
         
-        Fire.__init__(self, name, catch_rate,  pokemon_type)
+        super().__init__(name, catch_rate,  pokemon_type)
         self.start_life = self.hit_points
-
-
-    # def __repr__(self):
-    #     return "The Charizard " + self.get_name() + "of" + self.level + " with " + self.hit_points + " HP."
-
-
-    # def get_hit_points(self):
-    #     return self.hit_points
-
-    # def get_defense_power(self):
-    #     return self.defense_power
-
-    # def can_fight(self):
-    #     if floor(self.hit_points/10)>self.life:
-    #         return False
-    #     else:
-    #         return True
     
     def get_damage(self, other):
-        if self.type_pokemon in other.get_effective_against_me(): 
-            eff = 2
-        else:
-            eff = 0.5
-        
-        damage = floor((((2*self.level)/5)+2)*(self.attack_power/other.defense_power)*eff + 4)
-        return damage
-
-    # def attack(self, other):
-    #     if self.can_fight() and other.can_fight():
-    #         self.life = (self.life)*0.9
-    #         other.absorb(self.get_damage)
-
-    # def absorb(self, damage):
-    #     self.life = self.life - damage
+        return self.get_basic_damage(other) +4 
     
     def level_up(self, level_gain):
         if 0 < level_gain:
@@ -83,11 +47,11 @@ class Charizard(Fire):
                 self.level = 50
             
 
-    # def get_effective_against_me(self):
-    #         return self.effective_against_me
-    
+
     def get_type(self):
         return "Charizard"
+    def evolve(self, level_gain):
+      pass
     
-    # def get_level(self):
-    #         return self.level
+   
+   

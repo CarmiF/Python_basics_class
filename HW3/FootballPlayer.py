@@ -5,60 +5,60 @@ import copy
 
 
 class FootballPlayer:
-    def __init__(self, name, salary, performance):
-        self.name = name
-        self.salary = salary
-        self.performance = performance
+    def __init__(__self, name, salary, performance):
+        __self.name = name
+        __self.salary = salary
+        __self.performance = performance
 
-    def __repr__(self):
-        return f"Name: {self.name}\n" \
-               f"Salary: {self.salary}M \n" \
-               f"Performance: {self.performance}\n"
+    def __repr__(__self):
+        return f"Name: {__self.name}\n" \
+               f"Salary: {__self.salary}M \n" \
+               f"Performance: {__self.performance}\n"
 
 
 class OffensePlayer(FootballPlayer):
-    def __init__(self, name, salary, performance):
-        FootballPlayer.__init__(self, name, salary, performance)
-        self.total_yards = 0
+    def __init__(__self, name, salary, performance):
+        FootballPlayer.__init__(__self, name, salary, performance)
+        __self.total_yards = 0
 
-    def __repr__(self):
-        res = FootballPlayer.__repr__(self)
-        return res + f'Total Yards: {self.total_yards}' + '\n'
+    def __repr__(__self):
+        res = FootballPlayer.__repr__(__self)
+        return res + f'Total Yards: {__self.total_yards}' + '\n'
 
-    def run_yards(self, yards):
-        self.total_yards += yards
+    def run_yards(__self, yards):
+        __self.total_yards += yards
 
 
 class DefensePlayer(FootballPlayer):
-    def __init__(self, name, salary, performance):
+    def __init__(__self, name, salary, performance):
         super().__init__(name, salary, performance)
-        self.total_tackles = 0
+        __self.total_tackles = 0
 
-    def __repr__(self):
+    def __repr__(__self):
         res = super().__repr__()
-        return res + f'Total Tackles: {self.total_tackles}' + '\n'
+        return res + f'Total Tackles: {__self.total_tackles}' + '\n'
 
-    def tackle(self):
-        self.total_tackles += 1
+    def tackle(__self):
+        __self.total_tackles += 1
 
 
 class FootballTeam:
     """
     This class represents a football team
     """
-    def __init__(self, players):
+    def __init__(__self, players):
         """
         :param players: List - list of football players objects
         """
-        self.__players = players
+        __self.__players = players
 
-    def get_team(self):
-        # return self.__players
-        # return copy.copy(self.__players)
-        return copy.deepcopy(self.__players)
+    def get_team(__self):
+        # return __self.__players
+        # return copy.copy(__self.__players)
+        return copy.deepcopy(__self.__players)
 
-    def set_team(self, players):
-        self.__players = players
+    def set_team(__self, players):
+        __self.__players = players
 
 
 p = OffensePlayer('John Smith', 22, 7)
