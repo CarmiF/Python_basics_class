@@ -1,9 +1,9 @@
-from Pokemon import Pokemon_helper
+from Pokemon import Pokemon
 from abc import abstractmethod
 import copy
 
 
-class Fire(Pokemon_helper):
+class Fire(Pokemon):
 
    @abstractmethod
    def __init__(self, name, catch_rate,  pokemon_type):

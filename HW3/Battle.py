@@ -3,15 +3,15 @@ from Pokemon import Pokemon
 import copy
 
 class Battle:
-    def __init__(self, trainer1, trainer2):
+    def __init__(self, __trainer1, __trainer2):
         
-        if not isinstance(trainer1, Trainer):
-            raise TypeError("trainer1 type wrong")      
+        if not isinstance(__trainer1, Trainer):
+            raise TypeError("__trainer1 type wrong")      
         
-        if not isinstance(trainer2, Trainer):
-            raise TypeError("trainer2 type wrong")         
-        self.trainer1 = trainer1
-        self.trainer2 = trainer2
+        if not isinstance(__trainer2, Trainer):
+            raise TypeError("__trainer2 type wrong")         
+        self.__trainer1 = __trainer1
+        self.__trainer2 = __trainer2
     
 
     def check_can_fight(self, pokemon1, pokemon2):
@@ -28,30 +28,29 @@ class Battle:
         return "fight go on"
             
 
-    def dual_battle(self, trainer1_pokemon_id, trainer2_pokemon_id):
-        if len(self.trainer1.get_pokemon_lst()) <= trainer1_pokemon_id:
-            raise ValueError("Index is bigger than trainer1 pokemon list")
-        if len(self.trainer2.get_pokemon_lst()) <= trainer1_pokemon_id:
-            raise ValueError("Index is bigger than trainer2 pokemon list")
-        pokemon_trainer1 = self.trainer1.get_pokemon_lst()[trainer1_pokemon_id]
-        pokemon_trainer2 = self.trainer2.get_pokemon_lst()[trainer2_pokemon_id]
+    def dual_battle(self, __trainer1_pokemon_id, __trainer2_pokemon_id):
+        if len(self.__trainer1.get_pokemon_lst()) <= __trainer1_pokemon_id:
+            raise ValueError("Index is bigger than __trainer1 pokemon list")
+        if len(self.__trainer2.get_pokemon_lst()) <= __trainer1_pokemon_id:
+            raise ValueError("Index is bigger than __trainer2 pokemon list")
+        pokemon___trainer1 = self.__trainer1.get_pokemon_lst()[__trainer1_pokemon_id]
+        pokemon___trainer2 = self.__trainer2.get_pokemon_lst()[__trainer2_pokemon_id]
 
         round_num = 0
         winning_pokemon = "fight go on"
 
-        winning_pokemon = self.check_can_fight(pokemon_trainer1, pokemon_trainer2)
+        winning_pokemon = self.check_can_fight(pokemon___trainer1, pokemon___trainer2)
         while(winning_pokemon == "fight go on"):
             round_num = round_num +1
-            pokemon_trainer1.attack(pokemon_trainer2)
+            pokemon___trainer1.attack(pokemon___trainer2)
 
-            winning_pokemon = self.check_can_fight(pokemon_trainer1, pokemon_trainer2)
+            winning_pokemon = self.check_can_fight(pokemon___trainer1, pokemon___trainer2)
             if winning_pokemon != "fight go on":
                 break
-            pokemon_trainer2.attack(pokemon_trainer1)
-            winning_pokemon = self.check_can_fight(pokemon_trainer1, pokemon_trainer2)
+            pokemon___trainer2.attack(pokemon___trainer1)
+            winning_pokemon = self.check_can_fight(pokemon___trainer1, pokemon___trainer2)
             if winning_pokemon != "fight go on":
                 break
-        print(winning_pokemon)
         if winning_pokemon == "draw":
             winning_trainer_index = 0
         elif winning_pokemon == "pok 1 won":
@@ -89,33 +88,30 @@ class Battle:
         win = False
         trainer_won = 0
         while win == False:
-            print(trainer_won)
             if trainer_won == 0:
-                self.trainer1.pok1 ,pok1_i = self.chose_pokemon_can_fight(self.trainer1)
-                if isinstance(self.trainer1.pok1, Pokemon):
-                    self.trainer2.pok2, pok2_i = self.most_damage_pokemon(self.trainer2, self.trainer1.pok1)
+                self.__trainer1.pok1 ,pok1_i = self.chose_pokemon_can_fight(self.__trainer1)
+                if isinstance(self.__trainer1.pok1, Pokemon):
+                    self.__trainer2.pok2, pok2_i = self.most_damage_pokemon(self.__trainer2, self.__trainer1.pok1)
                 else:
-                    self.trainer2.pok2, pok2_i = self.chose_pokemon_can_fight(self.trainer2)
+                    self.__trainer2.pok2, pok2_i = self.chose_pokemon_can_fight(self.__trainer2)
             else:
                 if trainer_won == 1:
-                    self.trainer2.pok2, pok2_i = self.most_damage_pokemon(self.trainer2, self.trainer1.pok1)
+                    self.__trainer2.pok2, pok2_i = self.most_damage_pokemon(self.__trainer2, self.__trainer1.pok1)
                 if trainer_won == 2:
-                    self.trainer1.pok1,pok1_i = self.most_damage_pokemon(self.trainer1, self.trainer2.pok2)
-            print(pok1_i, pok2_i)
-            if isinstance(self.trainer1.pok1, int) and isinstance(self.trainer2.pok2, int):
-                win = True
-                return "The battle ended with a draw"
-            if isinstance(self.trainer1.pok1, int):
-                win = True
-                return self.trainer2.pok2.get_name() + " won the battle in  "+ str(round_result) +" rounds"
-            if isinstance(self.trainer2.pok2, int):
-                win = True
-                return self.trainer1.get_name() + " won the battle in " + str(round_result) +" rounds"
+                    self.__trainer1.pok1,pok1_i = self.most_damage_pokemon(self.__trainer1, self.__trainer2.pok2)
+            if isinstance(self.__trainer1.pok1, int) and isinstance(self.__trainer2.pok2, int):
+                print("The battle ended with a draw")
+                return
+            if isinstance(self.__trainer1.pok1, int):
+                print("Trainer " + self.__trainer2.pok2.get_name() + " won the battle in  "+ str(round_result) +" rounds")
+                return
+            if isinstance(self.__trainer2.pok2, int):
+                print("Trainer " +self.__trainer1.get_name() + " won the battle in " + str(round_result) +" rounds")
+                return
             
             fight_tuple = self.dual_battle(pok1_i ,pok2_i)
             round_result = fight_tuple[0] + round_result
             trainer_won = fight_tuple[1]
-            print(fight_tuple , round_result)
 
 
         
