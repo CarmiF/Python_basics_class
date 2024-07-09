@@ -1,25 +1,24 @@
 from Pokemon import Pokemon
 
-# # Attempting to create an instance of the abstract class Pokemon
-# try:
-#     pokemon = Pokemon("pikachu", 43)
-# except TypeError as e:
-#     print(e)  # Can't instantiate abstract class Pokemon with abstract methods ...
+# Attempting to create an instance of the abstract class Pokemon
+try:
+    pokemon = Pokemon("pikachu", 43)
+except TypeError as e:
+    print(e)  # Can't instantiate abstract class Pokemon with abstract methods ...
 
-# from Fire import Fire
+from Fire import Fire
 
-# # Attempting to create an instance of the abstract class Fire
-# try:
-#     fire = Fire("charmander", 43, "fire")
-# except TypeError as e:
-#     print(e)  # Can't instantiate abstract class Fire with abstract methods ...
+# Attempting to create an instance of the abstract class Fire
+try:
+    fire = Fire("charmander", 43, "fire")
+except TypeError as e:
+    print(e)  # Can't instantiate abstract class Fire with abstract methods ...
 
 from Charmander import Charmander
 
 # Creating instances of Charmander and demonstrating some functionality
 charmy = Charmander("charmy", 41, "fire", 6, 50, 54, 51)
 lst = charmy.get_effective_against_me()
-print(charmy.get_name())
 print(lst)  # ['water']
 lst = "electric"
 print(lst)  # ['electric']
@@ -102,7 +101,7 @@ from Blastoise import Blastoise
 from Trainer import Trainer
 from Battle import Battle
 
-# # Creating instances of Pikachu and Blastoise
+# Creating instances of Pikachu and Blastoise
 pika = Pikachu("pika", 40, "electric", 26, 90, 63, 85, 2)
 blasty = Blastoise("blasty", 43, "water", 37, 82, 93, 113)
 
@@ -122,7 +121,6 @@ print(misty)  # The Trainer misty is 18 years old and has the following pokemons
 from Charmander import Charmander
 from Charizard import Charizard
 from Wartortle import Wartortle
-from Squirtle import Squirtle
 
 charzy = Charizard("charzy", 45, "fire", 37, 93, 93, 82)
 pika = Pikachu("pika", 40, "electric", 32, 35, 60, 40, 2)
@@ -140,19 +138,8 @@ print(misty)  # The Trainer misty is 18 years old and has the following pokemons
 
 # Performing a total battle
 battle = Battle(ash, misty)
-
-
-print(battle.total_battle()) # "The battle ended with a draw"
-
-print("charzy damage warty 1 " +str(charzy.get_damage(warty)))
-print("warty damage charzy 2 " +str(warty.get_damage(charzy)))
-print("damage 3 " +str(charmy.get_damage(charzy)))
-print("damage 4 " +str(warty.get_damage(pika)))
-print("damage 4 " +str(pika.get_damage(warty)))
-print("damage 3 " +str(charmy.get_damage(pika)))
-print("damage 3 " +str(pika.get_damage(charmy)))
-
-
+battle.total_battle()
+print("The battle ended with a draw")
 
 print(misty)  # The Trainer misty is 18 years old and has the following pokemons (2 in total): The Wartortle warty of level 30 with 0 HP, The Charmander charmy of level 15 with -6 HP
 print(ash)  # The Trainer ash is 18 years old and has the following pokemons (2 in total): The Charizard charzy of level 37 with -12 HP, The Pikachu pika of level 32 with 2 HP
@@ -162,27 +149,25 @@ print(pika)  # The Pikachu pika of level 32 with 35 HP
 
 ash = Trainer("ash", 18, 6.0, [pika, charzy])
 misty = Trainer("misty", 18, 5.5, [warty, charmy])
-print(ash)
 print(misty)  # The Trainer misty is 18 years old and has the following pokemons (2 in total): The Wartortle warty of level 30 with 78 HP, The Charmander charmy of level 15 with 57 HP
 
 battle = Battle(ash, misty)
-print(battle.total_battle()) #"Trainer ash won the battle in 5 rounds")
+battle.total_battle()
+print("Trainer ash won the battle in 5 rounds")
 
-print(battle.dual_battle(1, 1))
-print(ash)  # The Trainer misty is 18 years old and has the following pokemons (2 in total): The Wartortle warty of level 30 with 3 HP, The Charmander charmy of level 15 with 5 HP
-print(misty)  # The Trainer ash is 18 years old and has the following pokemons (2 in total): The Pikachu pika of level 32 with 3 HP, The Charizard charzy of level 37 with 34 HP
+print(misty)  # The Trainer misty is 18 years old and has the following pokemons (2 in total): The Wartortle warty of level 30 with 3 HP, The Charmander charmy of level 15 with 5 HP
+print(ash)  # The Trainer ash is 18 years old and has the following pokemons (2 in total): The Pikachu pika of level 32 with 3 HP, The Charizard charzy of level 37 with 34 HP
 
 print(charzy)  # The Charizard charzy of level 37 with 93 HP
-charizardious = Charizard("charizardious", 45, "fire", 37, 93, 93,82)
-squirtly = Squirtle("squirtly", 41, "water", 9, 55, 49, 72)
+
 # Another battle configuration
-charmilious = Charmander("charmilious", 42, "fire", 13, 45, 55, 47)
 ash = Trainer("ash", 18, 6.0, [charmilious, warty, pika, charzy])
 misty = Trainer("misty", 18, 5.5, [charizardious, squirtly, blasty, charmy])
 
 # Performing another total battle
 battle = Battle(misty, ash)
-print(battle.total_battle()) # print("Trainer misty won the battle in 15 rounds")
+battle.total_battle()
+print("Trainer misty won the battle in 15 rounds")
 
 print(misty)  # The Trainer misty is 18 years old and has the following pokemons (4 in total): The Charizard charizardious of level 37 with -12 HP, The Squirtle squirtly of level 9 with 3 HP, The Blastoise blasty of level 37 with 4 HP, The Charmander charmy of level 15 with 38 HP
 print(ash)  # The Trainer ash is 18 years old and has the following pokemons (4 in total): The Charmeleon charmilious of level 19 with 6 HP, The Wartortle warty of level 30 with 2 HP, The Pikachu pika of level 32 with -2 HP, The Charizard charzy of level 35 with 1 HP

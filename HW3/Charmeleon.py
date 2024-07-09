@@ -20,21 +20,21 @@ class Charmeleon(Fire):
         if 58 < __hit_points < 77:
             self.__hit_points = __hit_points
         else:
-             ValueError("__hit_points must be 38 < __hit_points < 58")
+             raise ValueError("__hit_points must be 38 < __hit_points < 58")
         
         if not isinstance(__attack_power, int):
             raise TypeError("__hit_points type wrong")
         if 64 < __attack_power < 83:
             self.__attack_power = __attack_power
         else:
-            ValueError("__attack_power must be 51 < __attack_power <64")
+            raise ValueError("__attack_power must be 51 < __attack_power <64")
         
         if not isinstance(__defense_power, int):
             raise TypeError("__hit_points type wrong")
         if 58 < __defense_power < 77:
             self.__defense_power = __defense_power
         else:
-            ValueError("__defense_power must be 42< __defense_power < 58")
+            raise ValueError("__defense_power must be 42< __defense_power < 58")
         
         super().__init__(name, catch_rate,  pokemon_type)
         self.start_life = self.__hit_points

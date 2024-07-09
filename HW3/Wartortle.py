@@ -20,21 +20,21 @@ class Wartortle(Water):
         if 59 <= __hit_points <= 78:
             self.__hit_points = __hit_points
         else:
-             ValueError("__hit_points must be 38 < __hit_points < 58")
+             raise ValueError("__hit_points must be 38 < __hit_points < 58")
         
         if not isinstance(__attack_power, int):
             raise TypeError("__attack_power type wrong")
         if 63 <= __attack_power <= 82:
             self.__attack_power = __attack_power
         else:
-            ValueError("__attack_power must be 51 < __attack_power <64")
+            raise ValueError("__attack_power must be 51 < __attack_power <64")
         
         if not isinstance(__defense_power, int):
             raise TypeError("__defense_power type wrong")
         if 80 <= __defense_power <= 99:
             self.__defense_power = __defense_power
         else:
-            ValueError("__defense_power must be 42< __defense_power < 58")
+            raise ValueError("__defense_power must be 42< __defense_power < 58")
         
         Water.__init__(self, name, catch_rate,  pokemon_type)
         self.start_life = self.__hit_points

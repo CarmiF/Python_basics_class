@@ -19,21 +19,21 @@ class Pikachu(Electric):
         if 35 <= __hit_points <= 99:
             self.__hit_points = __hit_points
         else:
-             ValueError("__hit_points must be 35 <= __hit_points <= 99")
+             raise ValueError("__hit_points must be 35 <= __hit_points <= 99")
         
         if not isinstance(__attack_power, int):
             raise TypeError("__attack_power type wrong")
         if 55 <= __attack_power <= 99:
             self.__attack_power = __attack_power
         else:
-            ValueError("__attack_power must be 55 <= __attack_power <= 99")
+            raise ValueError("__attack_power must be 55 <= __attack_power <= 99")
         
         if not isinstance(__defense_power, int):
             raise TypeError("__defense_power type wrong")
         if 40 <= __defense_power <= 99:
             self.__defense_power = __defense_power
         else:
-            ValueError("__defense_power must be 40 <= __defense_power <= 99")
+            raise ValueError("__defense_power must be 40 <= __defense_power <= 99")
 
 
         if not isinstance(friendship, int):
@@ -41,7 +41,7 @@ class Pikachu(Electric):
         if 1 <= friendship <= 5:
             self.friendship = friendship
         else:
-            ValueError("__defense_power must be 1<= friendship < 5")
+            raise ValueError("__defense_power must be 1<= friendship < 5")
         
         Electric.__init__(self, name, catch_rate,  pokemon_type)
         self.start_life = self.__hit_points
@@ -64,7 +64,7 @@ class Pikachu(Electric):
             else:
                 self.__level = 50
          
-    def evolve(self, __level_gain):
+    def evolve(self):
        pass
     
 
@@ -103,3 +103,5 @@ class Pikachu(Electric):
             eff = 0.5
         basic_damage = int((((2*self.__level)/5)+2)*(self.__attack_power / other.get_defense_power())*eff)
         return copy.deepcopy(basic_damage)
+    
+
