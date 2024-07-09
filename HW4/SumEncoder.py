@@ -1,9 +1,6 @@
-import numpy as np
-from OneHotEncoder import OneHotEncoder
-
-
-
 from Vocabulary import Vocabulary
+from OneHotEncoder import OneHotEncoder
+import numpy as np
 sumEncoder_ran_example = True
         
 
@@ -44,36 +41,11 @@ class SumEncoder(OneHotEncoder):
         sen = self.__oneHotEncoder.decode(original_matrix)
 
         return sen
- 
-
-        
+    
 
 
 
-
-
-class BagOfWordsEncoder:
-    def __init__(self, vocabulary):
-        pass
-
-    def sentence_to_bag_of_words(self, sentence):
-        pass
-
-    def calculate_word_frequency(self, sentences):
-        pass
-
-
-def most_frequent_words(sentences):
-    pass
-
-
-def cosine_similarity(sentence1, sentence2, vocabulary):
-    pass
-
-
-def closest_sentences(sentences, vocabulary):
-    pass
-
+    
 sumEncoder_ran_example = True
 if sumEncoder_ran_example == True:
     voc = Vocabulary(["The cat sat on the mat!", "The cat, Alexa, sat on the mat.", "The dog, Bob, sat on the log"])
