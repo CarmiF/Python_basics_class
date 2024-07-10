@@ -5,7 +5,7 @@ sumEncoder_ran_example = True
         
 
 
-class SumEncoder(OneHotEncoder):
+class SumEncoder:
     def __init__(self, vocabulary):
         self.__vocabulary = vocabulary
         self.__oneHotEncoder = OneHotEncoder(self.__vocabulary)
@@ -28,16 +28,16 @@ class SumEncoder(OneHotEncoder):
     def decode(self, encoding):
         # Find the indices where each row has the first '1'
         indices = np.argmax(encoding == 0, axis=1)-1
-        print(indices)
+        # print(indices)
         indices[indices == -1] = len((self.__vocabulary.get_vocabulary()))-1
-        print(indices)
+        # print(indices)
 
         # Create a mask to reset the modified rows back to their original form
         mask = np.arange(encoding.shape[1]) == indices[:, np.newaxis]
-        print(mask)
+        # print(mask)
         # Reset the modified_matrix using the mask
         original_matrix = mask.astype(int)
-        print(original_matrix)
+        # print(original_matrix)
         sen = self.__oneHotEncoder.decode(original_matrix)
 
         return sen
@@ -46,7 +46,7 @@ class SumEncoder(OneHotEncoder):
 
 
     
-sumEncoder_ran_example = True
+sumEncoder_ran_example = False
 if sumEncoder_ran_example == True:
     voc = Vocabulary(["The cat sat on the mat!", "The cat, Alexa, sat on the mat.", "The dog, Bob, sat on the log"])
     print(voc.get_vocabulary())

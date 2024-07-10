@@ -1,95 +1,51 @@
 import numpy as np
 from OneHotEncoder import OneHotEncoder
-
-
-
 from Vocabulary import Vocabulary
-sumEncoder_ran_example = True
-        
-
-
-class SumEncoder(OneHotEncoder):
-    def __init__(self, vocabulary):
-        self.__vocabulary = vocabulary
-        self.__oneHotEncoder = OneHotEncoder(self.__vocabulary)
-
-
-
-    def encode(self, sentence):
-        
-        # Find indices of '1' in each row
-        encoded_matrix = self.__oneHotEncoder.encode(sentence)
-        indices = np.argmax(encoded_matrix, axis=1)
-
-        # Create a mask to set all elements before '1' in each row to 1
-        mask = np.arange(encoded_matrix.shape[1]) <= indices[:, np.newaxis]
-
-        # Apply the mask to the original matrix
-        modified_matrix = mask.astype(int)
-        return modified_matrix
-
-    def decode(self, encoding):
-        # Find the indices where each row has the first '1'
-        indices = np.argmax(encoding == 0, axis=1)-1
-        print(indices)
-        indices[indices == -1] = len((self.__vocabulary.get_vocabulary()))-1
-        print(indices)
-
-        # Create a mask to reset the modified rows back to their original form
-        mask = np.arange(encoding.shape[1]) == indices[:, np.newaxis]
-        print(mask)
-        # Reset the modified_matrix using the mask
-        original_matrix = mask.astype(int)
-        print(original_matrix)
-        sen = self.__oneHotEncoder.decode(original_matrix)
-
-        return sen
+from BagOfWordsEncoder import BagOfWordsEncoder
  
 
         
-
-
-
-
-
-class BagOfWordsEncoder:
-    def __init__(self, vocabulary):
-        pass
-
-    def sentence_to_bag_of_words(self, sentence):
-        pass
-
-    def calculate_word_frequency(self, sentences):
-        pass
-
-
 def most_frequent_words(sentences):
-    pass
+    voc = Vocabulary(sentences)
+    bag = BagOfWordsEncoder(voc)
+    freq_vec = bag.calculate_word_frequency(sentences)
+    max_value = np.max(freq_vec)
+    # print(type(max_value))
+    max_indices = list(np.where(freq_vec == max_value)[0])
+    # pr/int(type(max_indices))
+
+    return voc[max_indices]
+
 
 
 def cosine_similarity(sentence1, sentence2, vocabulary):
-    pass
+    bag = BagOfWordsEncoder(vocabulary)
+    count_vec_sen1 = (bag.sentence_to_bag_of_words(sentence1))
+    sen1_l2_norm =  np.linalg.norm(count_vec_sen1)
+    count_vec_sen2 = (bag.sentence_to_bag_of_words(sentence2))
+    sen2_l2_norm =  np.linalg.norm(count_vec_sen2)
+    scalar_sen1_sen2= count_vec_sen1 * count_vec_sen2
+    scalar_sen1_sen2_l2 = sen1_l2_norm * sen2_l2_norm
+    return np.round(scalar_sen1_sen2/scalar_sen1_sen2_l2,4).sum()
+
 
 
 def closest_sentences(sentences, vocabulary):
     pass
 
-sumEncoder_ran_example = True
-if sumEncoder_ran_example == True:
-    voc = Vocabulary(["The cat sat on the mat!", "The cat, Alexa, sat on the mat.", "The dog, Bob, sat on the log"])
-    print(voc.get_vocabulary())
-    sum_encoder = SumEncoder(voc)
-    encoded = sum_encoder.encode("The dog Alexa, sat on Bob!")
-    print(encoded)
-    decoded = sum_encoder.decode(encoded)
-    print(decoded)
 
+# print(most_frequent_words(["This is an example","The example is just study proposes.","Example is the best thing for practice!"]))
+# ['example', 'is']
+sentences = ["This is an example", "The example is just study proposes", "Example is the best thing for practice!"]
+voc = Vocabulary(sentences)
+print(voc.get_vocabulary())
+print(cosine_similarity(sentences[0], sentences[1], voc))
+# print(cosine_similarity(sentences[0], sentences[2], voc))
+# print(cosine_similarity(sentences[1], sentences[2], voc))
+# print(closest_sentences(sentences,voc))
 
-# ['alexa', 'bob', 'cat', 'dog', 'log', 'mat', 'on', 'sat', 'the']
-# [[1 1 1 1 1 1 1 1 1]
-# [1 1 1 1 0 0 0 0 0]
-# [1 0 0 0 0 0 0 0 0]
-# [1 1 1 1 1 1 1 1 0]
-# [1 1 1 1 1 1 1 0 0]
-# [1 1 0 0 0 0 0 0 0]]
-# the dog alexa sat on bob
+# ['an', 'best', 'example', 'for', 'is', 'just', 'practice', 'proposes', 'study', 'the', 'thing', 'this']
+# 0.4082
+# 0.378
+# 0.4629
+# [1, 2]

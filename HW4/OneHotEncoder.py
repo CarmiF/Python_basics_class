@@ -19,7 +19,7 @@ class OneHotEncoder:
         mask = np.argmax(encoding, axis=1)
         # Extract words using the mask
         sentence_words = np.take(self.__vocabulary.get_vocabulary(), mask)
-        print(sentence_words)
+        # print(sentence_words)
 
 
 OneHotEncoderne_hot_encoder = False

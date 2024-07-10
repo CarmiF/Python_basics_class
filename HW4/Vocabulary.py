@@ -1,5 +1,5 @@
 voc_ran_example = False
-
+import numpy as np
 
 class Vocabulary:
     def __init__(self, sentences=None):
@@ -43,7 +43,7 @@ class Vocabulary:
         return self.__vocabulary_list
     
     def __getitem__(self, key):
-        if isinstance(key,int):
+        if isinstance(key,int) or isinstance(key,np.int64) or isinstance(key,np.int32):
             if len(self.__vocabulary_list) > key:
                 return self.__vocabulary_list[key]
             else: 
@@ -73,7 +73,21 @@ class Vocabulary:
                 str1 = str1.replace(char, " ", 1)
         return str1
     
+    def contain(self, key):
+       
+        if isinstance(key, list):
+            for word in key:
+                if not word in self.get_vocabulary():
+                    print(word + " is not in vocabulary")
+                    return False
+                    
+            return True
+        if isinstance(key, str):
+            self.contain(self.tokenize(key))
+        return None
+        
     
+
     def sentences_to_one_clean_list(self, sentences):
         new_vocabulary_str = str(sentences).lower()
         # print(new_vocabulary_str)
